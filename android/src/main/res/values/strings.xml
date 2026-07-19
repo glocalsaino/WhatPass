@@ -273,7 +273,7 @@ WhatPass was born after detecting a real need within the Android ecosystem.
     <string name="back">Back</string>
     <string name="nav_beacon">Bluetooth Beacon</string>
     <string name="beacon_title">Bluetooth Beacon</string>
-    <string name="beacon_hint">Keep this screen open for the beacon to remain active</string>
+    <string name="beacon_hint">The beacon runs as a background service — you can close this screen safely. A notification will remain visible in the status bar while it is active. To stop it, use the notification action or return to this screen.</string>
     <string name="beacon_uuid_label">Proximity UUID</string>
     <string name="beacon_major_label">Major</string>
     <string name="beacon_minor_label">Minor</string>

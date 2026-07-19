@@ -256,7 +256,7 @@ WhatPass nació al detectar una necesidad real dentro del ecosistema Android.
   <string name="back">Atrás</string>
   <string name="nav_beacon">Baliza Bluetooth</string>
   <string name="beacon_title">Baliza Bluetooth</string>
-  <string name="beacon_hint">Mantén esta pantalla abierta para que la baliza siga activa</string>
+  <string name="beacon_hint">La baliza se emite en segundo plano: puedes cerrar esta pantalla sin interrumpirla. Mientras esté activa verás una notificación en la barra de estado. Para detenerla, usa el botón de la notificación o vuelve a esta pantalla.</string>
   <string name="beacon_uuid_label">UUID de proximidad</string>
   <string name="beacon_major_label">Major</string>
   <string name="beacon_minor_label">Minor</string>
