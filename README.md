@@ -10,19 +10,35 @@ WhatPass transforma el teléfono móvil en una cartera digital inteligente capaz
 
 **Repositorio de tarjetas**
 
-![Lista de tarjetas](docs/screenshots/lista_tarjetas.png)
+![Repositorio de tarjetas](docs/screenshots/repositorio.png)
+
+**Tarjeta de embarque**
+
+![Tarjeta de embarque](docs/screenshots/tarjeta_embarque.png)
+
+**Cupón de descuento**
+
+![Cupón de descuento](docs/screenshots/cupon_descuento.png)
+
+**Opciones de tarjeta: compartir, silenciar y eliminar**
+
+![Opciones de tarjeta](docs/screenshots/menu_opciones_tarjeta.png)
+
+**Organización en carpetas**
+
+![Mover a otra carpeta](docs/screenshots/mover_carpeta.png)
 
 **Menú lateral**
 
 ![Menú lateral](docs/screenshots/menu_lateral.png)
 
-**Validar pase — introducir código de operador**
+**Pantalla de opciones**
 
-![Validar pase — código de operador](docs/screenshots/validar_pase_codigo.png)
+![Pantalla de opciones](docs/screenshots/opciones.png)
 
-**Validar pase — escáner QR**
+**Validar pase — código de operador**
 
-![Validar pase — escáner QR](docs/screenshots/validar_pase.png)
+![Validar pase — código de operador](docs/screenshots/validar_pase.png)
 
 **Baliza Bluetooth**
 
