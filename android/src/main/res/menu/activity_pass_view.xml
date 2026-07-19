@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:custom="http://schemas.android.com/apk/res-auto">
+
+    <item
+            android:id="@+id/menu_share"
+            android:title="@string/menu_share"
+            android:icon="@drawable/ic_social_share"
+            custom:showAsAction="ifRoom" />
+
+    <item
+            android:id="@+id/menu_light"
+            android:title="light"
+            android:icon="@drawable/ic_device_brightness_high"
+            custom:showAsAction="ifRoom" />
+
+    <item
+            android:id="@+id/menu_mute_notifications"
+            android:title="@string/menu_mute_notifications"
+            custom:showAsAction="never" />
+
+    <item
+            android:id="@+id/menu_delete"
+            android:title="@string/menu_delete"
+            android:icon="@drawable/ic_action_delete"
+            custom:showAsAction="never" />
+</menu>

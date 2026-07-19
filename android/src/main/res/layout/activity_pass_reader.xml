@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <!-- Cámara a pantalla completa -->
+    <SurfaceView
+        android:id="@+id/scanner_surface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Marco guía centrado para el QR -->
+    <View
+        android:id="@+id/scan_frame"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/scan_frame_border" />
+
+    <!-- Overlay de resultado (oculto hasta que se escanea) -->
+    <FrameLayout
+        android:id="@+id/result_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="32dp">
+
+            <TextView
+                android:id="@+id/result_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="72sp"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:id="@+id/result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:maxWidth="280dp" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <!-- Barra superior con título y botón de código -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="top"
+        android:background="#CC000000"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="✕"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:background="@android:color/transparent" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/pass_reader_title"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingStart="8dp" />
+
+        <Button
+            android:id="@+id/btn_change_code"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="@string/pass_reader_change_code"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:background="@drawable/btn_outline_white" />
+
+    </LinearLayout>
+
+    <!-- Instrucción inferior -->
+    <TextView
+        android:id="@+id/scan_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="48dp"
+        android:text="@string/pass_reader_hint"
+        android:textColor="#CCFFFFFF"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:padding="8dp" />
+
+</FrameLayout>

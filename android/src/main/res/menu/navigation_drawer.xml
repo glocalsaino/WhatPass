@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+            android:id="@+id/menu_scan_passes"
+            android:icon="@drawable/ic_qr_code_scanner"
+            android:title="@string/nav_scan_passes"
+            app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/menu_beacon"
+            android:icon="@drawable/ic_bluetooth_beacon"
+            android:title="@string/nav_beacon"
+            app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/menu_settings"
+            android:icon="@drawable/ic_action_settings"
+            android:title="@string/nav_settings"
+            app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/menu_share"
+            android:icon="@drawable/ic_social_share"
+            android:title="@string/nav_share"
+            app:showAsAction="ifRoom"/>
+
+</menu>

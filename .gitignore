@@ -1,0 +1,21 @@
+.gradle
+build
+.idea
+#assets
+bin
+gen
+project.properties
+local.properties
+*.iml
+.DS_Store
+
+# Signing keys must never be committed - the real one lives outside the repo,
+# in ~/keystores/whatpass, referenced from ~/.gradle/gradle.properties.
+*.jks
+*.keystore
+keystore.properties
+
+# Firebase config contains API keys - keep it local only.
+# Each developer/CI environment needs their own copy.
+google-services.json
+

@@ -1,0 +1,21 @@
+buildscript {
+    ext {
+        kotlin_version = '1.9.23'
+        mockito_version = '3.4.6'
+        threetenbp_version = '1.6.8'
+        kotpref_version = '2.13.2'
+    }
+
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://www.jitpack.io' }
+        gradlePluginPortal()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.android.tools.build:gradle:8.13.2'
+        classpath 'com.google.gms:google-services:4.4.2'
+    }
+}

@@ -1,0 +1,150 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+        <ImageView
+                android:id="@+id/logo_img_view"
+                android:scaleType="fitCenter"
+                tools:src="@drawable/ic_launcher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:adjustViewBounds="true"
+                tools:ignore="ContentDescription"/>
+
+        <TextView
+                android:id="@+id/logo_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/logo_img_view"
+                android:layout_alignTop="@id/logo_img_view"
+                android:layout_alignBottom="@id/logo_img_view"
+                android:layout_marginStart="8dp"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                tools:text="Logo Text"/>
+
+        <LinearLayout
+                android:id="@+id/header_field_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:gravity="end"
+                android:orientation="horizontal"/>
+    </RelativeLayout>
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <ImageView
+                android:id="@+id/strip_img_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:adjustViewBounds="true"
+                tools:ignore="ContentDescription"/>
+
+        <!-- Only populated when the pass has a strip banner and non-empty primaryFields
+             (storeCard/coupon/eventTicket) - see PassViewFragment. Overlaid on top of the
+             banner image instead of in the normal field flow, per the issuer-style callout
+             convention requested for this case. -->
+        <LinearLayout
+                android:id="@+id/strip_primary_field_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|start"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical"/>
+    </FrameLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:orientation="horizontal">
+
+        <LinearLayout
+                android:id="@+id/front_field_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"/>
+
+        <ImageView
+                android:id="@+id/thumbnail_img_view"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="top"
+                android:layout_marginStart="8dp"
+                android:scaleType="centerCrop"
+                tools:ignore="ContentDescription"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/secondary_field_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:orientation="horizontal"/>
+
+    <LinearLayout
+            android:id="@+id/auxiliary_field_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:orientation="horizontal"/>
+
+    <include layout="@layout/barcode"/>
+
+    <ImageView
+            android:id="@+id/moreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="10dp"
+            android:src="@drawable/ic_action_expand_more"
+            android:contentDescription="@string/more"/>
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true">
+
+        <TextView
+                android:id="@+id/back_fields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp"
+                android:textColorLink="#3399FF"
+                android:padding="24dp"
+                android:visibility="gone"/>
+    </LinearLayout>
+
+    <ImageView
+            android:id="@+id/footer_img_view"
+            android:scaleType="fitXY"
+            tools:src="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:adjustViewBounds="true"
+            tools:ignore="ContentDescription"
+            android:padding="8dp"/>
+</LinearLayout>

@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">WhatPass</string>
+  <string name="last_updated">Actualizado: %s</string>
+  <string name="menu_mute_notifications">Silenciar notificaciones</string>
+  <string name="menu_unmute_notifications">Activar notificaciones</string>
+  <string name="notifications_muted">Notificaciones silenciadas para este pase</string>
+  <string name="notifications_unmuted">Notificaciones activadas para este pase</string>
+  <string name="logo">logo</string>
+  <string name="menu_map">Mostrar en mapa</string>
+  <string name="menu_delete">Eliminar</string>
+  <string name="menu_share">Compartir</string>
+  <string name="barcode">código de barras</string>
+  <string name="help_label">Ayuda</string>
+  <string name="help_content"><![CDATA[
+<h1>WhatPass: Tu repositorio de tarjetas digitales PKPASS para Android</h1>
+
+<b>¿Qué es WhatPass?</b><br/>
+WhatPass es una aplicación para Android diseñada para almacenar, organizar y gestionar tarjetas digitales en formato PKPASS. Su objetivo es ofrecer una experiencia equivalente a las carteras digitales más avanzadas, permitiendo a los usuarios llevar siempre consigo sus tarjetas, pases, cupones y credenciales de forma segura y actualizada.
+<p>WhatPass transforma el teléfono móvil en una cartera digital inteligente capaz de sustituir tarjetas de papel o plástico por una solución moderna, sostenible y con funcionalidades avanzadas.</p>
+
+<h1>1. ¿Qué es un archivo PKPASS?</h1>
+Un archivo PKPASS es un formato de tarjeta digital utilizado originalmente por Apple Wallet y adoptado por numerosos sistemas de identificación, fidelización y gestión de accesos.
+<p>Cada archivo PKPASS puede contener:</p>
+<li>Campos de información ilimitados.</li>
+<li>Datos personalizados para cada usuario.</li>
+<li>Imágenes, logotipos y elementos gráficos.</li>
+<li>Códigos QR, códigos de barras o códigos Aztec para identificación y validación.</li>
+<li>Información dinámica que puede actualizarse automáticamente.</li>
+<p>Además de mostrar información, las tarjetas PKPASS pueden interactuar con el usuario mediante diferentes mecanismos:</p>
+<li>Envío de notificaciones push.</li>
+<li>Apertura de enlaces web.</li>
+<li>Envío de tarjetas a través de correo electrónico, SMS, WhatsApp u otros servicios de mensajería.</li>
+<li>Acceso a servicios online mediante URL personalizadas.</li>
+<p>Las tarjetas PKPASS también pueden utilizarse como tarjetas de fidelización. Tras el escaneo de su código QR, los sistemas asociados pueden otorgar o descontar puntos, actualizar saldos, registrar visitas o modificar cualquier dato de la tarjeta. Estos cambios se reflejan automáticamente en la tarjeta digital instalada por el usuario.</p>
+
+<h1>2. ¿Cómo funciona el repositorio de PKPASS?</h1>
+WhatPass actúa como un repositorio centralizado de tarjetas digitales. Sus principales funciones son:
+<p><b>Almacenamiento centralizado</b><br/>
+Todas las tarjetas PKPASS se guardan en una única aplicación, evitando tener que buscar documentos, correos electrónicos o capturas de pantalla.</p>
+<p><b>Actualización automática</b><br/>
+Cuando el emisor de una tarjeta realiza cambios, WhatPass puede recibir las actualizaciones y reflejarlas automáticamente en el dispositivo.</p>
+<p><b>Recepción de notificaciones push</b><br/>
+Las organizaciones emisoras pueden enviar mensajes directamente a las tarjetas instaladas para comunicar promociones, recordatorios, cambios de horario, información de eventos o cualquier otra comunicación relevante.</p>
+<p><b>Eliminación de tarjetas</b><br/>
+Las tarjetas pueden eliminarse fácilmente cuando dejan de ser necesarias.</p>
+<p><b>Gestión de notificaciones y actualizaciones</b><br/>
+El usuario mantiene el control total sobre sus datos y puede:</p>
+<li>Activar o desactivar las actualizaciones automáticas.</li>
+<li>Activar o desactivar las notificaciones push.</li>
+<p><b>Accesos directos al escritorio</b><br/>
+WhatPass permite crear accesos directos en la pantalla principal del dispositivo para acceder rápidamente a una tarjeta concreta sin necesidad de abrir previamente la aplicación.</p>
+<p><b>Añadir evento al calendario</b><br/>
+Cuando una tarjeta incorpora una fecha relevante es posible enviar un evento al calendario.</p>
+<p><b>Localización en el mapa</b><br/>
+Cuando una tarjeta incorpora una ubicación, se permite su localización en la aplicación de mapas del dispositivo.</p>
+
+<h1>3. Ejemplos prácticos de tarjetas digitales</h1>
+El formato PKPASS es extremadamente versátil y puede utilizarse en numerosos escenarios:
+<p><b>Tarjetas de visita digitales</b><br/>
+Permiten compartir datos de contacto actualizados, enlaces web, correo electrónico y redes profesionales.</p>
+<p><b>Carnés de socio</b><br/>
+Ideales para asociaciones, clubes deportivos, entidades culturales y organizaciones profesionales.</p>
+<p><b>Tarjetas de empleado</b><br/>
+Facilitan la identificación corporativa y el acceso a servicios internos.</p>
+<p><b>Tarjetas de cliente o fidelización</b><br/>
+Permiten acumular y canjear puntos, registrar compras y acceder a promociones personalizadas.</p>
+<p><b>Cupones de descuento</b><br/>
+Los comercios pueden distribuir promociones digitales fácilmente actualizables.</p>
+<p><b>Entradas y pases para eventos</b><br/>
+Control de acceso mediante códigos QR para conciertos, conferencias, ferias y actividades culturales.</p>
+<p><b>Tarjetas de embarque</b><br/>
+Facilitan el acceso a vuelos y otros medios de transporte sin necesidad de imprimir documentos.</p>
+
+<h1>¿Cómo funciona la aplicación?</h1>
+WhatPass ha sido diseñada para simplificar al máximo la gestión de tarjetas digitales.
+<p><b>Incorporación de tarjetas</b><br/>
+Las tarjetas pueden añadirse de tres formas distintas:</p>
+<li>Descargando una tarjeta desde una URL.</li>
+<li>Abriendo un archivo PKPASS.</li>
+<li>Escaneando un código QR.</li>
+<p><b>Organización inteligente</b><br/>
+Una vez instaladas, las tarjetas se almacenan en el repositorio interno de WhatPass, donde pueden organizarse según distintos criterios:</p>
+<li>Orden temporal.</li>
+<li>Nivel de urgencia.</li>
+<li>Tipo de tarjeta.</li>
+<p><b>Acceso rápido</b><br/>
+El usuario puede crear accesos directos individuales en el escritorio del dispositivo para abrir directamente las tarjetas más utilizadas.</p>
+<p><b>Comunicación en tiempo real</b><br/>
+WhatPass recibe las notificaciones push enviadas por los emisores de las tarjetas, permitiendo mantener la información siempre actualizada.</p>
+<p><b>Información del dorso</b><br/>
+Las tarjetas incorporan información al dorso que admite hipervínculos a cualquier URL. Se puede ver la información al dorso haciendo clic en el icono de flecha que se encuentra al final de la parte frontal de la tarjeta.</p>
+<p><b>Sustitución del papel y del plástico</b><br/>
+La digitalización de tarjetas y documentos ofrece numerosas ventajas:</p>
+<li>Reduce el uso de papel y plástico.</li>
+<li>Evita pérdidas y deterioros.</li>
+<li>Permite actualizaciones remotas.</li>
+<li>Facilita la comunicación directa con el usuario.</li>
+<li>Integra servicios de mensajería y enlaces interactivos.</li>
+<li>Incorpora programas de fidelización con gestión automática de puntos.</li>
+<p>Gracias a estas capacidades, las tarjetas digitales PKPASS constituyen una solución moderna, sostenible y mucho más potente que las tarjetas tradicionales.</p>
+
+<h1>Historia del proyecto</h1>
+WhatPass nació al detectar una necesidad real dentro del ecosistema Android.
+<p>Tras comprobar que no existían aplicaciones que ofrecieran de forma conjunta todas las funcionalidades disponibles en Apple Wallet, surgió la idea de desarrollar una solución completa y abierta para Android.</p>
+<p>El formato PKPASS es un estándar creado por Apple y requiere cumplir una serie de especificaciones técnicas para garantizar la compatibilidad entre plataformas. WhatPass ha sido desarrollada respetando dichos estándares para ofrecer la máxima compatibilidad posible y una experiencia de usuario consistente.</p>
+<p>El objetivo del proyecto es acercar todas las ventajas de las carteras digitales modernas a los usuarios de Android mediante una aplicación potente, flexible y de código abierto.</p>
+<p>WhatPass está basada en el proyecto <a href=\'https://github.com/ligi/PassAndroid\'>PassAndroid</a>, del que hereda su arquitectura original.</p>
+
+<h1>Aviso Legal y Limitación de Responsabilidad</h1>
+<p>WhatPass es software libre, distribuido bajo los términos de la <a href=\'https://www.gnu.org/licenses/gpl-3.0.html\'>Licencia Pública General de GNU versión 3 (GPL-3.0-only)</a>. El código fuente completo está disponible públicamente en <a href=\'https://github.com/glocalsaino/WhatPass\'>github.com/glocalsaino/WhatPass</a>, donde cualquier persona puede consultarlo, modificarlo y redistribuirlo bajo los mismos términos. Salvo que la legislación aplicable disponga expresamente lo contrario, la aplicación se proporciona "tal cual" y "según disponibilidad", sin garantía expresa o implícita de ningún tipo respecto a su funcionamiento, disponibilidad, compatibilidad, continuidad, ausencia de errores o adecuación para una finalidad concreta.</p>
+<p>Aunque los desarrolladores realizan esfuerzos razonables para garantizar la calidad y correcto funcionamiento del software, no se garantiza que la aplicación esté libre de errores, interrupciones, vulnerabilidades de seguridad o incidencias derivadas de la interacción con sistemas, dispositivos o servicios de terceros.</p>
+<p>El usuario utiliza WhatPass bajo su exclusiva responsabilidad y asume la obligación de verificar que el uso de la aplicación resulta adecuado para sus necesidades y cumple con la normativa que le sea aplicable. Asimismo, será responsable de las tarjetas digitales que instale, de los contenidos almacenados en ellas y del uso que realice de las funcionalidades proporcionadas por la aplicación.</p>
+<p>Los desarrolladores, colaboradores y distribuidores de WhatPass no serán responsables de los daños o perjuicios que pudieran derivarse del uso de la aplicación, de la imposibilidad de utilizarla, de errores en los datos contenidos en las tarjetas digitales, de fallos en servicios de terceros, de pérdidas de información o de actuaciones realizadas por los usuarios o por terceros mediante las tarjetas gestionadas por la aplicación, excepto en aquellos supuestos en los que la responsabilidad no pueda ser excluida o limitada conforme a la legislación aplicable.</p>
+<p>WhatPass actúa únicamente como herramienta de almacenamiento y gestión de tarjetas digitales. Los desarrolladores no son responsables del contenido, autenticidad, validez, legalidad o exactitud de las tarjetas PKPASS emitidas por terceros, ni de las comunicaciones, promociones, programas de fidelización, sistemas de puntos, eventos o servicios asociados a dichas tarjetas.</p>
+<p>Nada de lo dispuesto en este aviso legal limitará o excluirá cualquier responsabilidad que, de acuerdo con la normativa aplicable de la Unión Europea o del Estado miembro correspondiente, no pueda ser legalmente excluida o limitada.</p>
+<p>Más información y política de privacidad en <a href=\'https://whatpass.es/\'>whatpass.es</a>. Contacto: <a href=\'mailto:info@whatpass.es\'>info@whatpass.es</a>.</p>
+
+]]></string>
+  <string name="notification_channel_pass_updates">Actualizaciones de pases</string>
+  <string name="notification_pass_updated_title">Pase actualizado</string>
+  <string name="notification_pass_updated_body">Uno de tus pases tiene nueva información</string>
+  <string name="qr_scan_hint">Apunta la cámara al código QR del pase</string>
+  <string name="qr_scan_error">No se ha detectado una URL de pase válida</string>
+  <string name="error_no_file_picker">No se encontró ninguna app para seleccionar archivos en este dispositivo</string>
+  <string name="importing_pass">Importando pase...</string>
+  <string name="drawer_open">abrir</string>
+  <string name="drawer_close">cerrar</string>
+  <string name="pass_problem">Lo sentimos, ha ocurrido un problema procesando esta tarjeta. Si lo deseas puedes enviarnos dicha tarjeta para comprobar cual es el problema y mejorar el software</string>
+  <string name="problem">Problema</string>
+  <string name="send">Enviar</string>
+  <string name="delete">¡Eliminar!</string>
+  <string name="choose_location">Seleccionar ubicación</string>
+  <string name="boarding_pass">Tarjeta de embarque</string>
+  <string name="category_event">Evento</string>
+  <string name="category_coupon">Cupón</string>
+  <string name="category_storecard">Tarjeta de compra</string>
+  <string name="category_generic">Generico</string>
+  <string name="category_none">sin Categoría</string>
+  <string name="nav_more">MAS</string>
+  <string name="nav_sort">ORDENAR</string>
+  <string name="nav_sort_category">Categoría</string>
+  <string name="nav_sort_date">Fecha</string>
+  <string name="nav_categories">CATEGORÍAS</string>
+  <string name="nav_share">Compartir</string>
+  <string name="pass_directions">Mapa</string>
+  <string name="pass_to_calendar">al Calendario</string>
+  <string name="invalid_passbook_title">Tarjeta no válida</string>
+  <string name="preparing_pass">Preparando el pase</string>
+  <string name="please_wait">por favor, espere - no debería tardar mucho</string>
+  <string name="passbook_is_shared_subject">una tarjeta compartida con usted</string>
+  <string name="passbook_share_chooser_title">¿Cómo enviar este pase?</string>
+  <string name="dialog_delete_confirm_text">¿Realmente quiere eliminar esta tarjeta?</string>
+  <string name="dialog_delete_title">¿Seguro?</string>
+  <string name="dialog_delete_confirm_delete_source_checkbox">¿eliminar la fuente también?</string>
+  <string name="more">MÁS</string>
+  <string name="less">MENOS</string>
+  <string name="scanning_for_passes">Buscando pases </string>
+  <string name="fab_choice_scan_pkpass_files">Buscar archivos pkpass</string>
+  <string name="fab_choice_scan_qr">Escanear código QR</string>
+  <string name="fab_choice_add_demo_pass">Añadir un pase demo</string>
+  <string name="fab_choice_create_pass">Crear pase</string>
+  <string name="empty_text_view_title">Todavía no tienes pases</string>
+  <string name="empty_text_view_body">Toca el enlace en tu email o en la web para añadir un pase\no toca + para escanear un código QR\no abre un archivo .pkpass desde tu dispositivo</string>
+  <string name="downloading_new_pass_version">descargando nueva versión del pase</string>
+  <string name="unzip_pass_dialog_title">Abriendo tarjeta</string>
+  <string name="unzip_pass_dialog_message">Por favor, espere…</string>
+  <string name="action_update">actualizado</string>
+  <string name="no_calendar_app_found">Ninguna app de Calendario encontrada</string>
+  <string name="pass_updated">Tarjeta actualizada</string>
+  <string name="expiration_date_to_calendar_warning_message">Está a punto de añadir la fecha de expiración al calendario - Si cree que existe una fecha de expiración en esta tarjeta - envíemelo por favor - WhatPass necesita saber dónde está</string>
+  <string name="expiration_date_to_calendar_warning_title">Añadir fecha de expiración</string>
+  <string name="topic_trash">Papelera</string>
+  <string name="topic_new">nuevo</string>
+  <string name="topic_archive">guardar</string>
+  <string name="move_to_new_topic">Mover a otra carpeta</string>
+  <string name="categories_nav">%d Categorías</string>
+  <string name="passes_nav">%d Tarjetas</string>
+  <string name="found_pass">encontrados: %s</string>
+  <string name="found__pass">Y %d más</string>
+  <string name="scan_finished_dialog_title">Búsqueda terminada</string>
+  <string name="scan_finished_dialog_text">encontradas %d tarjetas</string>
+  <string name="emtytrash_label">Vaciar papelera</string>
+  <string name="barcode_edit_hint_alternative_message">mensaje alternativo</string>
+  <string name="barcode_edit_random">aleatorio</string>
+  <string name="barcode_edit_scan">escanear</string>
+  <string name="barcode_edit_message">Mensaje</string>
+  <string name="barcode_edit_aztec">AZTEC</string>
+  <string name="barcode_edit_pdf417">PDF417</string>
+  <string name="barcode_edit_qr">QR</string>
+  <string name="barcode_edit_button_add_barcode">Añadir código de barras</string>
+  <string name="categories_voucher">vale</string>
+  <string name="edit_time">editar hora</string>
+  <string name="edit_location">editar ubicación</string>
+  <string name="add_front_field">Añadir campo en el anverso</string>
+  <string name="add_back_fields">Añadir campo en el reverso</string>
+  <string name="change_color_dialog_title">Seleccionar color</string>
+  <string name="select_category_dialog_title">Seleccionar Categoría</string>
+  <string name="barcode_edit_code128">Código 128</string>
+  <string name="barcode_edit_code39">Código 39</string>
+  <string name="add_footer_image">Añadir imagen en el pié de página</string>
+  <string name="add_logo_image">añadir logo</string>
+  <string name="add_header_image">añadir imagen en el encabezamiento</string>
+  <string name="add_barcode">Añadir código de barras</string>
+  <string name="edit_barcode_dialog_title">Editar código de barras</string>
+  <string name="empty_trash_dialog_message">Verdaderamente quiere vaciar la papelera? No podrá recuperar esta acción</string>
+  <string name="empty_trash_dialog_title">atención</string>
+  <string name="new_topic_input_hint">Nombre de la carpeta</string>
+  <string name="new_topic_suggestions">Sugerencias</string>
+  <string name="cannot_be_empty">No puede estar vacío</string>
+  <string name="please_use_the_swipe_feature">Por favor, utilice la  función de deslizar</string>
+  <string name="type">Tipo</string>
+  <string name="undo">Deshacer</string>
+  <string name="sort_order_date_asc">Fecha Ascendente</string>
+  <string name="sort_order_date_desc">Fecha Descendente</string>
+  <string name="sort_order_date_type">Tipo</string>
+  <string name="sort_order_date_temporaldistance">Distancia temporal</string>
+  <string-array name="category_edit_options">
+    <item>@string/select_category_dialog_title</item>
+    <item>@string/change_color_dialog_title</item>
+    <item>Seleccione Icono</item>
+  </string-array>
+  <string name="night_mode_night">Noche</string>
+  <string name="night_mode_day">Día</string>
+  <string name="night_mode_auto">Auto </string>
+  <string name="preference_autolight_title">Brillo automático </string>
+  <string name="preference_autolight_summary">¿Debo aumentar el brillo cuando muestro el código de barras? </string>
+  <string name="preference_condensed_title">Modo condensado</string>
+  <string name="preference_condensed_summary">¿Debería mostrar más detalles y menos desorden? </string>
+  <string name="preference_sort_title">Orden</string>
+  <string name="preference_sort_summary">¿Cómo debería ordenar los pases? </string>
+  <string name="preference_daynight_title">Tema Diurno/Nocturno </string>
+  <string name="preference_daynight_summary">¿Debería ser oscuro o claro? </string>
+  <string name="image_import">Importar imagen</string>
+  <string name="pdf_import">Importar PDF</string>
+  <string name="field_source">fuente</string>
+  <string name="field_note">nota</string>
+  <string name="field_advice_label">aviso</string>
+  <string name="field_advice_text">solicita esPass o Passbook de tu vendedor</string>
+  <string name="field_source_image">Imagen</string>
+  <string name="field_note_image">Esto fue importado de una imagen - no es un pass real</string>
+  <string name="field_source_pdf">PDF</string>
+  <string name="field_note_pdf">Esto fue importado de un PDF - no es un pass real</string>
+  <string name="nav_settings">Opciones</string>
+  <string name="nav_scan_passes">Validar pase</string>
+  <string name="pass_reader_title">Escanear pases</string>
+  <string name="pass_reader_hint">Apunta la cámara al código QR del pase</string>
+  <string name="pass_reader_edit_code_title">Código de operador (opcional)</string>
+  <string name="pass_reader_edit_code_message">Si el sistema de pases requiere un código de edición, introdúcelo aquí. Déjalo vacío para escanear sin código. No se volverá a pedir hasta que cierres y vuelvas a abrir el escáner.</string>
+  <string name="pass_reader_edit_code_hint">Código de edición</string>
+  <string name="pass_reader_change_code">Cambiar código</string>
+  <string name="pass_reader_no_camera">Se necesita permiso de cámara para escanear pases</string>
+  <string name="pass_reader_ok">Hecho</string>
+  <string name="pass_reader_error">Error al procesar el pase</string>
+  <string name="pass_reader_network_error">Error de red — comprueba la conexión</string>
+  <string name="back">Atrás</string>
+  <string name="nav_beacon">Baliza Bluetooth</string>
+  <string name="beacon_title">Baliza Bluetooth</string>
+  <string name="beacon_hint">Mantén esta pantalla abierta para que la baliza siga activa</string>
+  <string name="beacon_uuid_label">UUID de proximidad</string>
+  <string name="beacon_major_label">Major</string>
+  <string name="beacon_minor_label">Minor</string>
+  <string name="beacon_status_active">● Emitiendo señal</string>
+  <string name="beacon_status_inactive">● Inactiva</string>
+  <string name="beacon_start">Activar baliza</string>
+  <string name="beacon_stop">Detener baliza</string>
+  <string name="beacon_invalid_uuid">El formato del UUID no es correcto</string>
+  <string name="beacon_invalid_major_minor">Major y Minor deben ser números entre 0 y 65535</string>
+  <string name="beacon_bt_disabled">Activa el Bluetooth para usar la baliza</string>
+  <string name="beacon_unsupported">Este dispositivo no admite la emisión de señales BLE</string>
+  <string name="beacon_permission_denied">Se necesita permiso de Bluetooth para emitir la señal</string>
+  <string name="beacon_error_unsupported">Este dispositivo no admite la emisión de señales BLE</string>
+  <string name="beacon_error_too_many">Demasiadas balizas activas. Detén otras aplicaciones y vuelve a intentarlo</string>
+  <string name="beacon_error_generic">Error en la baliza (código %d)</string>
+  <string name="beacon_notification_channel">Baliza Bluetooth</string>
+  <string name="beacon_notification_text">Baliza activa</string>
+  <string name="geofence_notification_channel">Alertas de localización de pases</string>
+  <string name="beacon_proximity_notification_channel">Alertas de baliza de pases</string>
+  <string name="nav_betatest_opt_in_out">Testeador opt-in/out</string>
+  <string name="launcher_shortcut">Acceso directo</string>
+  <string name="open_file">Abrir archivo</string>
+  <string name="error_no_permission_msg">Se necesita permiso para importar el pase</string>
+  <string name="error_no_permission_title">Error de permisos</string>
+  <string name="scan_pass_message">Buscando pases. Por favor, espere.</string>
+</resources>

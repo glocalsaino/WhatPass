@@ -1,0 +1,66 @@
+package com.glocalsaino.miwallet
+
+import android.annotation.TargetApi
+import android.os.Build
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.pressBack
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
+import org.junit.Rule
+import org.junit.Test
+import com.glocalsaino.miwallet.R.id.pass_recyclerview
+import com.glocalsaino.miwallet.functions.checkThatHelpIsThere
+import com.glocalsaino.miwallet.functions.expand
+import com.glocalsaino.miwallet.functions.isCollapsed
+import com.glocalsaino.miwallet.ui.PassListActivity
+import org.ligi.trulesk.TruleskActivityRule
+
+@TargetApi(14)
+class ThePassListActivity {
+
+    @get:Rule
+    var rule = TruleskActivityRule(PassListActivity::class.java) {
+        TestApp.populatePassStoreWithSinglePass()
+    }
+
+    @Test
+    fun testListIsThere() {
+
+        onView(withId(pass_recyclerview)).check(matches(isDisplayed()))
+        rule.screenShot("list")
+    }
+
+    @Test
+    fun testHelpMenuBringsUsToHelp() {
+        onView(withId(R.id.menu_help)).perform(click())
+
+        checkThatHelpIsThere()
+    }
+
+    @Test
+    fun testCloseFabOnBackPressed() {
+        onView(withId(R.id.fam)).perform(expand())
+
+        pressBack()
+
+        onView(withId(R.id.fam))
+                .check(matches(isDisplayed()))
+                .check(matches(isCollapsed()))
+    }
+
+
+    @Test
+    fun testOpenVisibleOn19plus() {
+        onView(withId(R.id.fam)).perform(expand())
+
+        pressBack()
+
+        if (Build.VERSION.SDK_INT >= 19) {
+            onView(withId(R.id.fab_action_open_file)).check(matches(isDisplayed()))
+        } else {
+            onView(withId(R.id.fab_action_open_file)).check(matches(withEffectiveVisibility(Visibility.GONE)))
+        }
+    }
+
+}

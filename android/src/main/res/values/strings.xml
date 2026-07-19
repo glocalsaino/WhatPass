@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">"WhatPass"</string>
+    <string name="notification_channel_pass_updates">Pass updates</string>
+    <string name="notification_pass_updated_title">Pass updated</string>
+    <string name="notification_pass_updated_body">One of your passes has new information</string>
+    <string name="qr_scan_hint">Point the camera at the pass\'s QR code</string>
+    <string name="qr_scan_error">No valid pass URL detected</string>
+    <string name="error_no_file_picker">No app found to pick a file on this device</string>
+    <string name="importing_pass">Importing pass...</string>
+    <string name="logo">"logo"</string>
+    <string name="menu_map">Show on map</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_print">Print</string>
+    <string name="menu_edit">Edit</string>
+    <string name="barcode">"barcode"</string>
+    <string name="help_label">"Help"</string>
+<string name="help_content"><![CDATA[
+<h1>WhatPass: Your PKPASS digital card repository for Android</h1>
+
+<b>What is WhatPass?</b><br/>
+WhatPass is an Android app designed to store, organize and manage digital cards in PKPASS format. Its goal is to offer an experience equivalent to the most advanced digital wallets, letting users always carry their cards, passes, coupons and credentials securely and up to date.
+<p>WhatPass turns your phone into a smart digital wallet capable of replacing paper or plastic cards with a modern, sustainable solution with advanced features.</p>
+
+<h1>1. What is a PKPASS file?</h1>
+A PKPASS file is a digital card format originally used by Apple Wallet and adopted by many identification, loyalty and access-management systems.
+<p>Each PKPASS file can contain:</p>
+<li>Unlimited information fields.</li>
+<li>Data personalized for each user.</li>
+<li>Images, logos and graphic elements.</li>
+<li>QR codes, barcodes or Aztec codes for identification and validation.</li>
+<li>Dynamic information that can update automatically.</li>
+<p>Besides showing information, PKPASS cards can interact with the user through several mechanisms:</p>
+<li>Sending push notifications.</li>
+<li>Opening web links.</li>
+<li>Sending cards via email, SMS, WhatsApp or other messaging services.</li>
+<li>Accessing online services through personalized URLs.</li>
+<p>PKPASS cards can also be used as loyalty cards. After scanning its QR code, the associated systems can grant or deduct points, update balances, register visits or modify any data on the card. These changes are automatically reflected on the digital card installed by the user.</p>
+
+<h1>2. How does the PKPASS repository work?</h1>
+WhatPass acts as a centralized repository of digital cards. Its main functions are:
+<p><b>Centralized storage</b><br/>
+All PKPASS cards are kept in a single app, avoiding the need to search through documents, emails or screenshots.</p>
+<p><b>Automatic updates</b><br/>
+When the issuer of a card makes changes, WhatPass can receive the updates and reflect them automatically on the device.</p>
+<p><b>Push notification reception</b><br/>
+Issuing organizations can send messages directly to installed cards to communicate promotions, reminders, schedule changes, event information or any other relevant communication.</p>
+<p><b>Card deletion</b><br/>
+Cards can be easily deleted when no longer needed.</p>
+<p><b>Notification and update management</b><br/>
+The user keeps full control of their data and can:</p>
+<li>Turn automatic updates on or off.</li>
+<li>Turn push notifications on or off.</li>
+<p><b>Home-screen shortcuts</b><br/>
+WhatPass lets you create shortcuts on the device\'s home screen to quickly access a specific card without having to open the app first.</p>
+<p><b>Add event to calendar</b><br/>
+When a card includes a relevant date, you can add an event to the calendar.</p>
+<p><b>Locate on the map</b><br/>
+When a card includes a location, you can locate it in the device\'s map app.</p>
+
+<h1>3. Practical examples of digital cards</h1>
+The PKPASS format is extremely versatile and can be used in many scenarios:
+<p><b>Digital business cards</b><br/>
+Allow sharing up-to-date contact details, web links, email and professional networks.</p>
+<p><b>Membership cards</b><br/>
+Ideal for associations, sports clubs, cultural entities and professional organizations.</p>
+<p><b>Employee cards</b><br/>
+Make corporate identification and access to internal services easier.</p>
+<p><b>Customer or loyalty cards</b><br/>
+Allow accumulating and redeeming points, registering purchases and accessing personalized promotions.</p>
+<p><b>Discount coupons</b><br/>
+Businesses can distribute easily-updatable digital promotions.</p>
+<p><b>Event tickets and passes</b><br/>
+Access control via QR codes for concerts, conferences, fairs and cultural activities.</p>
+<p><b>Boarding passes</b><br/>
+Make access to flights and other means of transport easier without printing documents.</p>
+
+<h1>How does the app work?</h1>
+WhatPass has been designed to make managing digital cards as simple as possible.
+<p><b>Adding cards</b><br/>
+Cards can be added in three different ways:</p>
+<li>Downloading a card from a URL.</li>
+<li>Opening a PKPASS file.</li>
+<li>Scanning a QR code.</li>
+<p><b>Smart organization</b><br/>
+Once installed, cards are stored in WhatPass\'s internal repository, where they can be organized by different criteria:</p>
+<li>Time order.</li>
+<li>Urgency level.</li>
+<li>Card type.</li>
+<p><b>Quick access</b><br/>
+Users can create individual shortcuts on the device\'s home screen to open the most-used cards directly.</p>
+<p><b>Real-time communication</b><br/>
+WhatPass receives push notifications sent by card issuers, keeping information always up to date.</p>
+<p><b>Back-of-card information</b><br/>
+Cards include back-of-card information that supports hyperlinks to any URL. You can see the back-of-card information by tapping the arrow icon at the bottom of the front of the card.</p>
+<p><b>Replacing paper and plastic</b><br/>
+Digitizing cards and documents offers many advantages:</p>
+<li>Reduces the use of paper and plastic.</li>
+<li>Avoids losses and damage.</li>
+<li>Allows remote updates.</li>
+<li>Makes direct communication with the user easier.</li>
+<li>Integrates messaging services and interactive links.</li>
+<li>Includes loyalty programs with automatic point management.</li>
+<p>Thanks to these capabilities, PKPASS digital cards are a modern, sustainable solution that\'s far more capable than traditional cards.</p>
+
+<h1>Project history</h1>
+WhatPass was born after detecting a real need within the Android ecosystem.
+<p>After confirming that no app offered, all together, the full set of features available in Apple Wallet, the idea came up to build a complete, open solution for Android.</p>
+<p>The PKPASS format is a standard created by Apple and requires meeting a series of technical specifications to ensure cross-platform compatibility. WhatPass has been developed respecting those standards to offer the highest possible compatibility and a consistent user experience.</p>
+<p>The project\'s goal is to bring all the advantages of modern digital wallets to Android users through a powerful, flexible and open-source app.</p>
+<p>WhatPass is based on the <a href=\'https://github.com/ligi/PassAndroid\'>PassAndroid</a> project, from which it inherits its original architecture.</p>
+
+<h1>Legal notice and limitation of liability</h1>
+<p>WhatPass is free software, distributed under the terms of the <a href=\'https://www.gnu.org/licenses/gpl-3.0.html\'>GNU General Public License version 3 (GPL-3.0-only)</a>. The complete source code is publicly available at <a href=\'https://github.com/glocalsaino/WhatPass\'>github.com/glocalsaino/WhatPass</a>, where anyone can review, modify and redistribute it under the same terms. Unless applicable law expressly states otherwise, the app is provided "as is" and "as available", without any express or implied warranty regarding its operation, availability, compatibility, continuity, freedom from errors or fitness for a particular purpose.</p>
+<p>Although the developers make reasonable efforts to ensure the quality and correct operation of the software, there is no guarantee that the app is free of errors, interruptions, security vulnerabilities or issues arising from interaction with third-party systems, devices or services.</p>
+<p>The user uses WhatPass at their own risk and is responsible for verifying that the use of the app is suitable for their needs and complies with applicable regulations. They are also responsible for the digital cards they install, the content stored in them, and the use they make of the app\'s features.</p>
+<p>The developers, contributors and distributors of WhatPass shall not be liable for damages or losses arising from the use of the app, the inability to use it, errors in the data contained in the digital cards, failures of third-party services, loss of information, or actions carried out by users or third parties through the cards managed by the app, except in cases where liability cannot be excluded or limited under applicable law.</p>
+<p>WhatPass acts solely as a storage and management tool for digital cards. The developers are not responsible for the content, authenticity, validity, legality or accuracy of PKPASS cards issued by third parties, nor for the communications, promotions, loyalty programs, points systems, events or services associated with such cards.</p>
+<p>Nothing in this legal notice shall limit or exclude any liability that, under applicable European Union or member-state law, cannot be legally excluded or limited.</p>
+<p>More information and privacy policy at <a href=\'https://whatpass.es/\'>whatpass.es</a>. Contact: <a href=\'mailto:info@whatpass.es\'>info@whatpass.es</a>.</p>
+
+    ]]></string>
+    <string name="drawer_open">"open"</string>
+    <string name="drawer_close">"close"</string>
+    <string name="pass_problem">"Sorry, but there was a problem processing this card. If you want you can send me this card so I can check what the problem is and improve the software."</string>
+    <string name="problem">"Problem"</string>
+    <string name="send">"Send"</string>
+    <string name="delete">"Delete!"</string>
+    <string name="choose_location">"Choose Location"</string>
+    <string name="boarding_pass">"Boarding Pass"</string>
+    <string name="category_event">"Event"</string>
+    <string name="category_coupon">"Coupon"</string>
+    <string name="category_storecard">"Store Card"</string>
+    <string name="category_generic">"generic"</string>
+    <string name="category_none">"no Category"</string>
+    <string name="nav_more">"MORE"</string>
+    <string name="nav_sort">"SORT"</string>
+    <string name="nav_sort_category">"Category"</string>
+    <string name="nav_sort_date">"Date"</string>
+    <string name="nav_categories">"CATEGORIES"</string>
+    <string name="nav_share">"Share"</string>
+    <string name="pass_directions">"Map"</string>
+    <string name="pass_to_calendar">"to Calendar"</string>
+    <string name="invalid_passbook_title">Invalid card</string>
+    <string name="preparing_pass">Preparing Pass</string>
+    <string name="please_wait">Importing the pass - please wait a bit</string>
+    <string name="passbook_is_shared_subject">a card is shared with you</string>
+    <string name="passbook_share_chooser_title">How to send Pass?</string>
+    <string name="dialog_delete_confirm_text">Do you really want to delete this card?</string>
+    <string name="dialog_delete_title">Sure?</string>
+    <string name="dialog_delete_confirm_delete_source_checkbox">also delete source?</string>
+    <string name="more">MORE</string>
+    <string name="less">LESS</string>
+    <string name="scanning_for_passes">Scanning for Passes</string>
+    <string name="fab_choice_scan_pkpass_files">Scan for pkpass files</string>
+    <string name="fab_choice_scan_qr">Scan QR code</string>
+    <string name="fab_choice_add_demo_pass">Add Demo-Pass</string>
+    <string name="fab_choice_create_pass">Create Pass</string>
+    <string name="empty_text_view_title">No passes yet</string>
+    <string name="empty_text_view_body">Tap the link in your email or website to add a pass\nor tap + to scan a QR code\nor open a .pkpass file from your device</string>
+    <string name="downloading_new_pass_version">downloading new pass version</string>
+    <string name="unzip_pass_dialog_title">Opening card</string>
+    <string name="unzip_pass_dialog_message">Please wait…</string>
+    <string name="action_update">update</string>
+    <string name="no_calendar_app_found">No Calendar-App found</string>
+    <string name="pass_updated">Pass Updated</string>
+    <string name="expiration_date_to_calendar_warning_message">You are about to add the expiration-date to the calendar - If you think there is a better date in this pass - please send it to me - WhatPass needs to know where this</string>
+    <string name="expiration_date_to_calendar_warning_title">Add Expiration-Date</string>
+    <string name="topic_trash">trash</string>
+    <string name="topic_new">new</string>
+    <string name="topic_archive">archive</string>
+    <string name="move_to_new_topic">Move to new Topic</string>
+    <string name="categories_nav">%d Categories</string>
+    <string name="passes_nav">%d Passes</string>
+    <string name="market_url">https://play.google.com/store/apps/details?id=%s</string>
+    <string name="last_updated">Updated: %s</string>
+    <string name="menu_mute_notifications">Mute notifications</string>
+    <string name="menu_unmute_notifications">Unmute notifications</string>
+    <string name="notifications_muted">Notifications muted for this pass</string>
+    <string name="notifications_unmuted">Notifications enabled for this pass</string>
+    <string name="found_pass">found: %s</string>
+    <string name="found__pass">And %d more</string>
+    <string name="scan_finished_dialog_title">Scan finished.</string>
+    <string name="scan_finished_dialog_text">found %d passes</string>
+    <string name="emtytrash_label">empty trash</string>
+    <string name="barcode_edit_hint_alternative_message">alternative Message</string>
+    <string name="barcode_edit_random">random</string>
+    <string name="barcode_edit_scan">scan</string>
+    <string name="barcode_edit_message">Message</string>
+    <string name="barcode_edit_aztec">AZTEC</string>
+    <string name="barcode_edit_pdf417">PDF417</string>
+    <string name="barcode_edit_qr">QR</string>
+    <string name="barcode_edit_button_add_barcode">Add Barcode</string>
+    <string name="categories_voucher">voucher</string>
+    <string name="edit_time">edit time</string>
+    <string name="edit_location">edit location</string>
+    <string name="add_front_field">Add front field</string>
+    <string name="add_back_fields">Add back field</string>
+    <string name="change_color_dialog_title">Select color</string>
+    <string name="select_category_dialog_title">Select category</string>
+    <string name="barcode_edit_code128">code 128</string>
+    <string name="barcode_edit_code39">code 39</string>
+    <string name="add_footer_image">add footer image</string>
+    <string name="add_logo_image">add logo image</string>
+    <string name="add_header_image">add header image</string>
+    <string name="add_barcode">add Barcode</string>
+    <string name="edit_barcode_dialog_title">Edit BarCode</string>
+    <string name="empty_trash_dialog_message">"Really empty trash? You cannot restore "</string>
+    <string name="empty_trash_dialog_title">warning</string>
+    <string name="new_topic_input_hint">Title for new topic</string>
+    <string name="new_topic_suggestions">Suggestions:</string>
+    <string name="cannot_be_empty">cannot be empty</string>
+    <string name="please_use_the_swipe_feature">Please use the swipe feature</string>
+    <string name="type">Type</string>
+    <string name="undo">undo</string>
+
+    <string name="sort_order_date_asc">Date Ascending</string>
+    <string name="sort_order_date_desc">Date Descending</string>
+    <string name="sort_order_date_type">Type</string>
+    <string name="sort_order_date_temporaldistance">Temporal distance</string>
+
+
+    <string-array name="category_edit_options">
+        <item>@string/select_category_dialog_title</item>
+        <item>@string/change_color_dialog_title</item>
+        <item>Select Icon</item>
+    </string-array>
+
+    <string name="night_mode_night">Night</string>
+    <string name="night_mode_day">Day</string>
+    <string name="night_mode_auto">Follow System</string>
+
+    <string name="preference_autolight_title">Automatic light</string>
+    <string name="preference_autolight_summary">Should I increase brightness when showing barcode?</string>
+
+    <string name="preference_condensed_title">Condensed mode</string>
+    <string name="preference_condensed_summary">Should I show more detail and less clutter?</string>
+
+
+    <string name="preference_sort_title">Sort order</string>
+    <string name="preference_sort_summary">How should I sort the passes?</string>
+
+
+    <string name="preference_daynight_title">Day/Night theme</string>
+    <string name="preference_daynight_summary">Should I be dark or light?</string>
+
+    <string name="image_import">Image Import</string>
+    <string name="pdf_import">PDF Import</string>
+
+    <string name="field_source">source</string>
+    <string name="field_note">note</string>
+    <string name="field_advice_label">advice</string>
+    <string name="field_advice_text">demand esPass or Passbook from your vendor</string>
+
+    <string name="field_source_image">Image</string>
+    <string name="field_note_image">This is imported from a image - not a real pass</string>
+
+    <string name="field_source_pdf">PDF</string>
+    <string name="field_note_pdf">This is imported from a PDF - not a real pass</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_scan_passes">Validate pass</string>
+    <string name="pass_reader_title">Scan passes</string>
+    <string name="pass_reader_hint">Point the camera at the pass QR code</string>
+    <string name="pass_reader_edit_code_title">Operator code (optional)</string>
+    <string name="pass_reader_edit_code_message">If the pass system requires an edit code, enter it here. Leave empty to scan without a code. You will not be asked again until you reopen the scanner.</string>
+    <string name="pass_reader_edit_code_hint">Edit code</string>
+    <string name="pass_reader_change_code">Change code</string>
+    <string name="pass_reader_no_camera">Camera permission is required to scan passes</string>
+    <string name="pass_reader_ok">Done</string>
+    <string name="pass_reader_error">Error processing the pass</string>
+    <string name="pass_reader_network_error">Network error — check your connection</string>
+    <string name="back">Back</string>
+    <string name="nav_beacon">Bluetooth Beacon</string>
+    <string name="beacon_title">Bluetooth Beacon</string>
+    <string name="beacon_hint">Keep this screen open for the beacon to remain active</string>
+    <string name="beacon_uuid_label">Proximity UUID</string>
+    <string name="beacon_major_label">Major</string>
+    <string name="beacon_minor_label">Minor</string>
+    <string name="beacon_status_active">● Broadcasting</string>
+    <string name="beacon_status_inactive">● Inactive</string>
+    <string name="beacon_start">Enable beacon</string>
+    <string name="beacon_stop">Disable beacon</string>
+    <string name="beacon_invalid_uuid">UUID format is invalid</string>
+    <string name="beacon_invalid_major_minor">Major and Minor must be numbers between 0 and 65535</string>
+    <string name="beacon_bt_disabled">Enable Bluetooth to use the beacon</string>
+    <string name="beacon_unsupported">This device does not support BLE advertising</string>
+    <string name="beacon_permission_denied">Bluetooth permission is required to broadcast</string>
+    <string name="beacon_error_unsupported">This device does not support BLE advertising</string>
+    <string name="beacon_error_too_many">Too many active advertisers. Stop other apps and try again</string>
+    <string name="beacon_error_generic">Beacon error (code %d)</string>
+    <string name="beacon_notification_channel">Bluetooth Beacon</string>
+    <string name="beacon_notification_text">Beacon broadcasting</string>
+    <string name="geofence_notification_channel">Pass location alerts</string>
+    <string name="beacon_proximity_notification_channel">Pass beacon alerts</string>
+    <string name="nav_betatest_opt_in_out">Betatest opt-in/out</string>
+    <string name="launcher_shortcut">Launcher shortcut</string>
+    <string name="open_file">Open File</string>
+
+    <string name="error_no_permission_msg">Need permission to import pass</string>
+    <string name="error_no_permission_title">Permission Error</string>
+    <string name="scan_pass_message">Scanning for passes. Please wait.</string>
+
+
+</resources>

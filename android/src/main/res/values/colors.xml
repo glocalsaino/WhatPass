@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="highlight_color">#FF4CAF50</color>
+    <color name="dividing_color">#FF388E3C</color>
+    <color name="primary">#FF26AF4A</color>
+    <color name="accent">#FF26AF4A</color>
+    <color name="secondary">#FF197230</color>
+    <color name="ic_launcher_background">#FFFEEE00</color>
+
+    <color name="card_view_background">#f9f9f9</color>
+
+    <color name="icon_green">#FF81C784</color>
+</resources>

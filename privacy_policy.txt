@@ -1,0 +1,93 @@
+POLÍTICA DE PRIVACIDAD DE WHATPASS
+
+Última actualización: 18 de julio de 2026
+
+1. RESPONSABLE DE LA APLICACIÓN
+
+WhatPass es una aplicación desarrollada y mantenida por:
+
+Glocal Saino, S.L.
+CIF: B32465080
+A Peroxa, Ourense, España
+Web: https://whatpass.es/
+Contacto: info@whatpass.es
+
+2. QUÉ HACE LA APLICACIÓN
+
+WhatPass es un lector y organizador de pases digitales en formato .pkpass (el estándar de Apple Wallet): entradas de eventos, tarjetas de embarque, cupones, tarjetas de fidelización, reservas de hotel, etc. Permite importar estos pases desde un enlace, un correo, un código QR o un archivo del dispositivo, verlos organizados por carpetas y, cuando el emisor del pase lo permite, recibir avisos si el pase se actualiza.
+
+WhatPass no emite pases ni presta los servicios que hay detrás de cada pase (una aerolínea, un hotel, una tienda, un ayuntamiento, etc.). Cada pase es creado y gestionado por la entidad que lo emite; WhatPass únicamente lo muestra y lo organiza en tu dispositivo.
+
+3. QUÉ DATOS TRATA LA APLICACIÓN Y PARA QUÉ
+
+WhatPass está diseñada para funcionar con la mínima recogida de datos posible:
+
+a) Datos de los pases que importas
+Cuando importas un pase, su contenido (texto, imágenes, código de barras/QR, y cualquier dato personal que el emisor haya incluido, como tu nombre, número de reserva o localizador) se guarda únicamente en el almacenamiento privado de tu dispositivo. WhatPass no envía copias de tus pases a ningún servidor propio ni los comparte con nadie. Si desinstalas la app o borras un pase, esos datos se eliminan.
+
+b) Cámara
+Se usa para dos finalidades distintas:
+ - Importar un pase: escanear un código QR que contiene o apunta a un archivo .pkpass.
+ - Validar un pase (función para operadores): escanear el código QR de la tarjeta de un cliente para comunicarse con el servidor del emisor y registrar una acción (otorgar o descontar puntos, registrar un acceso, etc.).
+En ambos casos la app no guarda fotos ni graba vídeo; la imagen se procesa en el propio dispositivo para leer el código y no se almacena ni se transmite.
+
+c) Acceso a archivos
+Cuando eliges "Abrir archivo" para importar un pase .pkpass guardado en tu dispositivo, el sistema operativo te pedirá permiso para que la app pueda leer ese archivo concreto. WhatPass no accede a ningún otro archivo ni explora el almacenamiento del dispositivo por su cuenta.
+
+d) Conexión a internet
+La app se conecta a internet para:
+ - Descargar el pase cuando abres un enlace, un correo o un código QR que apunta a él.
+ - Consultar o actualizar manualmente un pase ya importado, contactando directamente con el servidor del emisor de ese pase (no con un servidor de WhatPass).
+ - Validar un pase mediante la función de escáner para operadores: la app envía la información del código QR escaneado al servidor del emisor del pase para registrar la acción correspondiente (puntos, acceso, etc.) y recibe la respuesta. WhatPass no guarda ni registra estos datos; la conexión se establece directamente con el servidor del emisor.
+ Todas estas conexiones se hacen directamente entre tu dispositivo y el servidor de cada emisor, siguiendo el protocolo estándar de Apple Wallet (PassKit) o la URL configurada por el emisor. WhatPass no interviene en ese tráfico ni lo registra.
+
+e) Notificaciones push (actualizaciones automáticas)
+Para los pases cuyo emisor lo soporta, WhatPass puede registrar tu dispositivo para recibir un aviso automático cuando el pase cambie (por ejemplo, si se actualizan los puntos de una tarjeta de fidelización). Para ello:
+ - Tu dispositivo obtiene un token de Firebase Cloud Messaging (servicio de Google) que lo identifica solo a efectos de entrega de notificaciones.
+ - Ese token se comparte con el emisor del pase correspondiente, igual que haría cualquier aplicación de cartera compatible con Apple Wallet.
+ - Cuando el emisor quiere avisar de un cambio, lo hace a través de una función intermedia (Cloud Function) operada por Glocal Saino, S.L., cuyo único trabajo es reenviar ese aviso a Firebase para que llegue a tu dispositivo. Esta función no guarda ningún dato: no almacena el token, ni el pase, ni ninguna información personal; simplemente retransmite el aviso en el momento.
+ - Si prefieres no recibir estos avisos, puedes silenciarlos por pase desde la propia aplicación, o desactivar las notificaciones de la app desde los ajustes del sistema.
+
+f) Ubicación del dispositivo
+Cuando un pase incluye coordenadas geográficas configuradas por su emisor (por ejemplo, la dirección de un estadio o una tienda), WhatPass usa la ubicación del dispositivo para detectar cuándo te encuentras cerca de ese lugar y mostrarte una notificación con información relevante del pase (por ejemplo, "Bienvenido al estadio" al acercarte al recinto).
+
+ - La ubicación se procesa localmente a través de Google Play Services. Glocal Saino, S.L. no recibe ni almacena datos de ubicación en ningún servidor propio.
+ - La detección funciona en segundo plano, incluso con la app cerrada, siempre que hayas concedido el permiso de ubicación en segundo plano.
+ - Esta función solo se activa si alguno de tus pases importados contiene ubicaciones configuradas por el emisor. Si ningún pase tiene ubicaciones, el permiso no se usa.
+ - Puedes desactivarla en cualquier momento retirando el permiso de ubicación desde los ajustes del sistema.
+
+g) Bluetooth — detección de balizas
+Cuando un pase incluye identificadores de baliza Bluetooth (UUID iBeacon) configurados por su emisor, WhatPass escanea señales BLE (Bluetooth Low Energy) en segundo plano para detectar balizas cercanas compatibles y mostrarte la información relevante del pase.
+
+ - El escaneo se realiza completamente en local. No se transmite a ningún servidor información sobre las balizas detectadas ni sobre la proximidad del dispositivo.
+ - Esta función solo se activa si alguno de tus pases importados contiene balizas configuradas por el emisor y si el Bluetooth del dispositivo está activado.
+ - Puedes desactivarla retirando el permiso de Bluetooth desde los ajustes del sistema.
+
+4. QUÉ NO HACE WHATPASS
+
+ - No usa herramientas de analítica ni de seguimiento de uso.
+ - No muestra publicidad.
+ - No requiere crear una cuenta ni iniciar sesión.
+ - No vende ni comparte datos con terceros para fines comerciales o publicitarios.
+
+5. TERCEROS INVOLUCRADOS
+
+ - Emisores de pases (aerolíneas, comercios, organizadores de eventos, administraciones, etc.): son responsables independientes de los datos que incluyen en los pases que emiten y de cómo los tratan en sus propios sistemas. WhatPass no tiene control sobre esas políticas; te recomendamos consultar la política de privacidad de cada emisor.
+ - Google Firebase Cloud Messaging: utilizado únicamente para la entrega de notificaciones push. El tratamiento que Google hace de estos datos técnicos se rige por su propia política de privacidad.
+ - Google Play Services (ubicación): la función de alertas por proximidad usa la API de geofencing de Google Play Services para detectar cuándo el dispositivo entra en una zona geográfica definida en un pase. Google procesa los datos de ubicación según su propia política de privacidad.
+
+6. CONSERVACIÓN DE DATOS
+
+Los datos de los pases importados permanecen en tu dispositivo hasta que tú los borres o desinstales la aplicación. Glocal Saino, S.L. no conserva copia de esos datos en ningún servidor propio.
+
+7. TUS DERECHOS
+
+Como los datos de tus pases se guardan únicamente en tu dispositivo, puedes acceder a ellos, modificarlos o eliminarlos en cualquier momento desde la propia aplicación. Si tienes cualquier duda sobre esta política o quieres ejercer tus derechos de acceso, rectificación, supresión, oposición o portabilidad conforme al RGPD, puedes escribirnos a info@whatpass.es.
+
+8. MENORES
+
+WhatPass no está dirigida específicamente a menores de edad y no recoge conscientemente datos de menores más allá de los que pueda contener un pase legítimamente importado por sus padres o tutores.
+
+9. CAMBIOS EN ESTA POLÍTICA
+
+Podemos actualizar esta política si cambian las funciones de la app o la normativa aplicable. Publicaremos cualquier cambio en esta misma página, indicando la fecha de la última actualización.

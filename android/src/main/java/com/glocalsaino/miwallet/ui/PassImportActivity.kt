@@ -1,0 +1,151 @@
+package com.glocalsaino.miwallet.ui
+
+import android.Manifest
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
+import android.os.Bundle
+import android.view.View.GONE
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.koin.android.ext.android.inject
+import com.glocalsaino.miwallet.startActivityFromClass
+import com.glocalsaino.miwallet.alert
+import com.glocalsaino.miwallet.R
+import com.glocalsaino.miwallet.Tracker
+import com.glocalsaino.miwallet.databinding.ActivityImportBinding
+import com.glocalsaino.miwallet.functions.NotAPassUrlException
+import com.glocalsaino.miwallet.functions.fromURI
+import com.glocalsaino.miwallet.model.PassStore
+import com.glocalsaino.miwallet.geofence.GeofenceManager
+import com.glocalsaino.miwallet.passkit.PassUpdateManager
+
+class PassImportActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityImportBinding
+    val tracker: Tracker by inject()
+    val passStore: PassStore by inject()
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (granted) doImport(true) else onExternalStorageDenied()
+    }
+
+    private fun doImportWithPermissionCheck(withPermission: Boolean) {
+        if (!withPermission) {
+            doImport(false)
+        } else {
+            val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+                Manifest.permission.READ_MEDIA_IMAGES
+            else
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            requestPermissionLauncher.launch(permission)
+        }
+    }
+
+    private fun doImport(withPermission: Boolean) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val fromURI = fromURI(this@PassImportActivity, intent!!.data!!, tracker)
+
+                withContext(Dispatchers.Main) {
+                    binding.progressContainer.visibility = GONE
+
+                    if (fromURI == null) {
+                        finish()
+                    } else {
+                        if (isFinishing) {
+                            val spec = UnzipPassController.InputStreamUnzipControllerSpec(fromURI, application, passStore, null, null)
+                            UnzipPassController.processInputStream(spec)
+                        } else {
+                            UnzipPassDialog.show(fromURI, this@PassImportActivity, passStore) { path ->
+                                val id = path.split("/".toRegex()).dropLastWhile(String::isEmpty).toTypedArray().last()
+                                val passbookForId = passStore.getPassbookForId(id)
+                                passStore.currentPass = passbookForId
+                                passStore.classifier.moveToTopic(passbookForId!!, getString(R.string.topic_new))
+                                PassUpdateManager.registerForUpdatesIfPossible(applicationContext, passbookForId)
+                                GeofenceManager.register(applicationContext, passbookForId)
+                                if (passbookForId.locations.isNotEmpty() && !GeofenceManager.hasLocationPermission(this@PassImportActivity)) {
+                                    requestLocationPermissions()
+                                }
+                                startActivityFromClass(PassViewActivity::class.java)
+                                finish()
+                            }
+                        }
+                    }
+                }
+            } catch (e: NotAPassUrlException) {
+                withContext(Dispatchers.Main) {
+                    binding.progressContainer.visibility = GONE
+                    try {
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(e.url)))
+                    } catch (notFound: ActivityNotFoundException) {
+                        tracker.trackException("No browser to open non-pass URL", notFound, false)
+                    }
+                    finish()
+                }
+            } catch (e: Exception) {
+                if (e.message?.contains("Permission") == true && !withPermission) {
+                    doImportWithPermissionCheck(true)
+                } else {
+                    tracker.trackException("Error in import", e, false)
+                    withContext(Dispatchers.Main) {
+                        binding.progressContainer.visibility = GONE
+                        alert(R.string.pass_problem, R.string.problem) { finish() }
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (intent.data?.scheme == null) {
+            tracker.trackException("invalid_import_uri", false)
+            finish()
+            return
+        }
+
+        binding = ActivityImportBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        doImportWithPermissionCheck(false)
+    }
+
+    private fun onExternalStorageDenied() {
+        binding.progressContainer.visibility = GONE
+        alert(R.string.error_no_permission_msg, R.string.error_no_permission_title, onOK = { finish() })
+    }
+
+    private val requestBackgroundLocation = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (granted) GeofenceManager.registerAll(applicationContext, passStore)
+    }
+
+    private val requestFineLocation = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { results ->
+        if (results[Manifest.permission.ACCESS_FINE_LOCATION] == true) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                requestBackgroundLocation.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+            } else {
+                GeofenceManager.registerAll(applicationContext, passStore)
+            }
+        }
+    }
+
+    private fun requestLocationPermissions() {
+        requestFineLocation.launch(arrayOf(
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ))
+    }
+}
