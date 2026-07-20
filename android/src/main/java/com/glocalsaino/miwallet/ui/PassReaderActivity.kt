@@ -225,6 +225,16 @@ class PassReaderActivity : AppCompatActivity(), SurfaceHolder.Callback {
                 Log.d(TAG, "Step 1 response (200 chars): ${html1.take(200)}")
 
                 if (!html1.contains("psEditCode", ignoreCase = true)) {
+                    // Check if this is a pass download URL, not a validation endpoint
+                    val contentType = r1.headers["Content-Type"] ?: ""
+                    if (contentType.contains("pkpass", ignoreCase = true) ||
+                        html1.contains("<html", ignoreCase = true)
+                    ) {
+                        withContext(Dispatchers.Main) {
+                            showResult(getString(R.string.pass_reader_is_download_url), false)
+                        }
+                        return@launch
+                    }
                     // No form — the server returned a direct result
                     val msg = stripHtml(html1).ifEmpty {
                         if (r1.isSuccessful) getString(R.string.pass_reader_ok)

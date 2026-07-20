@@ -253,6 +253,7 @@ WhatPass nació al detectar una necesidad real dentro del ecosistema Android.
   <string name="pass_reader_ok">Hecho</string>
   <string name="pass_reader_error">Error al procesar el pase</string>
   <string name="pass_reader_network_error">Error de red — comprueba la conexión</string>
+  <string name="pass_reader_is_download_url">Este QR descarga un pase. Usa «Añadir pase escaneando un QR» en su lugar.</string>
   <string name="back">Atrás</string>
   <string name="nav_beacon">Baliza Bluetooth</string>
   <string name="beacon_title">Baliza Bluetooth</string>

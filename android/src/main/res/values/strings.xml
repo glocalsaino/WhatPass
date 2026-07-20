@@ -270,6 +270,7 @@ WhatPass was born after detecting a real need within the Android ecosystem.
     <string name="pass_reader_ok">Done</string>
     <string name="pass_reader_error">Error processing the pass</string>
     <string name="pass_reader_network_error">Network error — check your connection</string>
+    <string name="pass_reader_is_download_url">This QR code downloads a pass. Use \"Add pass by scanning a QR\" instead.</string>
     <string name="back">Back</string>
     <string name="nav_beacon">Bluetooth Beacon</string>
     <string name="beacon_title">Bluetooth Beacon</string>
