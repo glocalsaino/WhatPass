@@ -293,6 +293,10 @@ WhatPass was born after detecting a real need within the Android ecosystem.
     <string name="beacon_notification_channel">Bluetooth Beacon</string>
     <string name="beacon_notification_text">Beacon broadcasting</string>
     <string name="geofence_notification_channel">Pass location alerts</string>
+    <string name="location_disclosure_title">Location access required</string>
+    <string name="location_disclosure_message">This pass includes a geographic location set by its issuer. WhatPass uses background location access to notify you when you are near that place, even if the app is closed.\n\nYour location is processed entirely on your device and is never sent to any server.</string>
+    <string name="location_disclosure_ok">Continue</string>
+    <string name="location_disclosure_cancel">No thanks</string>
     <string name="beacon_proximity_notification_channel">Pass beacon alerts</string>
     <string name="nav_betatest_opt_in_out">Betatest opt-in/out</string>
     <string name="launcher_shortcut">Launcher shortcut</string>

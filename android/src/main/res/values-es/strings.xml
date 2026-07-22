@@ -276,6 +276,10 @@ WhatPass nació al detectar una necesidad real dentro del ecosistema Android.
   <string name="beacon_notification_channel">Baliza Bluetooth</string>
   <string name="beacon_notification_text">Baliza activa</string>
   <string name="geofence_notification_channel">Alertas de localización de pases</string>
+  <string name="location_disclosure_title">Acceso a la ubicación</string>
+  <string name="location_disclosure_message">Este pase incluye una ubicación geográfica configurada por su emisor. WhatPass usa el acceso a la ubicación en segundo plano para notificarte cuando estés cerca de ese lugar, incluso si la aplicación está cerrada.\n\nTu ubicación se procesa íntegramente en tu dispositivo y nunca se envía a ningún servidor.</string>
+  <string name="location_disclosure_ok">Continuar</string>
+  <string name="location_disclosure_cancel">No, gracias</string>
   <string name="beacon_proximity_notification_channel">Alertas de baliza de pases</string>
   <string name="nav_betatest_opt_in_out">Testeador opt-in/out</string>
   <string name="launcher_shortcut">Acceso directo</string>

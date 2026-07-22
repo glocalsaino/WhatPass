@@ -51,7 +51,7 @@ class GeofenceBroadcastReceiver : BroadcastReceiver(), KoinComponent {
             val iconBitmap = pass.getBitmap(passStore, PassBitmapDefinitions.BITMAP_ICON)
 
             val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_maps_place)
+                .setSmallIcon(R.drawable.ic_notification_location)
                 .setContentTitle(pass.description ?: context.getString(R.string.app_name))
                 .setContentText(text)
                 .setStyle(NotificationCompat.BigTextStyle().bigText(text))

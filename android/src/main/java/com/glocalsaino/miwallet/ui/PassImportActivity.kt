@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View.GONE
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
@@ -72,10 +73,14 @@ class PassImportActivity : AppCompatActivity() {
                                 PassUpdateManager.registerForUpdatesIfPossible(applicationContext, passbookForId)
                                 GeofenceManager.register(applicationContext, passbookForId)
                                 if (passbookForId.locations.isNotEmpty() && !GeofenceManager.hasLocationPermission(this@PassImportActivity)) {
-                                    requestLocationPermissions()
+                                    requestLocationPermissions {
+                                        startActivityFromClass(PassViewActivity::class.java)
+                                        finish()
+                                    }
+                                } else {
+                                    startActivityFromClass(PassViewActivity::class.java)
+                                    finish()
                                 }
-                                startActivityFromClass(PassViewActivity::class.java)
-                                finish()
                             }
                         }
                     }
@@ -124,10 +129,14 @@ class PassImportActivity : AppCompatActivity() {
         alert(R.string.error_no_permission_msg, R.string.error_no_permission_title, onOK = { finish() })
     }
 
+    private var pendingNavigate: (() -> Unit)? = null
+
     private val requestBackgroundLocation = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
         if (granted) GeofenceManager.registerAll(applicationContext, passStore)
+        pendingNavigate?.invoke()
+        pendingNavigate = null
     }
 
     private val requestFineLocation = registerForActivityResult(
@@ -136,16 +145,29 @@ class PassImportActivity : AppCompatActivity() {
         if (results[Manifest.permission.ACCESS_FINE_LOCATION] == true) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 requestBackgroundLocation.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                return@registerForActivityResult  // navigate after background location result
             } else {
                 GeofenceManager.registerAll(applicationContext, passStore)
             }
         }
+        pendingNavigate?.invoke()
+        pendingNavigate = null
     }
 
-    private fun requestLocationPermissions() {
-        requestFineLocation.launch(arrayOf(
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ))
+    private fun requestLocationPermissions(onDone: () -> Unit) {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.location_disclosure_title)
+            .setMessage(R.string.location_disclosure_message)
+            .setPositiveButton(R.string.location_disclosure_ok) { _, _ ->
+                pendingNavigate = onDone
+                requestFineLocation.launch(arrayOf(
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ))
+            }
+            .setNegativeButton(R.string.location_disclosure_cancel) { _, _ ->
+                onDone()
+            }
+            .show()
     }
 }
