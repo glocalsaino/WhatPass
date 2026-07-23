@@ -118,7 +118,9 @@ class PassImportActivity : AppCompatActivity() {
                     && !withPermission
                     && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q
                 if (canFixWithStorage) {
-                    doImportWithPermissionCheck(true)
+                    withContext(Dispatchers.Main) {
+                        doImportWithPermissionCheck(true)
+                    }
                 } else {
                     tracker.trackException("Error in import", e, false)
                     withContext(Dispatchers.Main) {
