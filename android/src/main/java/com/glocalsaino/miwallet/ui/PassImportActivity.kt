@@ -44,20 +44,16 @@ class PassImportActivity : AppCompatActivity() {
             doImport(false)
         } else {
             val permission = Manifest.permission.READ_EXTERNAL_STORAGE
-            if (shouldShowRequestPermissionRationale(permission)) {
-                AlertDialog.Builder(this)
-                    .setTitle(R.string.storage_permission_title)
-                    .setMessage(R.string.storage_permission_message)
-                    .setPositiveButton(R.string.location_disclosure_ok) { _, _ ->
-                        requestPermissionLauncher.launch(permission)
-                    }
-                    .setNegativeButton(R.string.location_disclosure_cancel) { _, _ ->
-                        onExternalStorageDenied()
-                    }
-                    .show()
-            } else {
-                requestPermissionLauncher.launch(permission)
-            }
+            AlertDialog.Builder(this)
+                .setTitle(R.string.storage_permission_title)
+                .setMessage(R.string.storage_permission_message)
+                .setPositiveButton(R.string.location_disclosure_ok) { _, _ ->
+                    requestPermissionLauncher.launch(permission)
+                }
+                .setNegativeButton(R.string.location_disclosure_cancel) { _, _ ->
+                    onExternalStorageDenied()
+                }
+                .show()
         }
     }
 
