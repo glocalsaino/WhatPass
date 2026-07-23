@@ -104,7 +104,14 @@ class PassImportActivity : AppCompatActivity() {
                     finish()
                 }
             } catch (e: Exception) {
-                if (e.message?.contains("Permission") == true && !withPermission) {
+                val isPermissionError = e.message?.contains("Permission") == true
+                // On Android 10+ content URIs from intents carry automatic read access —
+                // requesting READ_EXTERNAL_STORAGE or READ_MEDIA_IMAGES won't help and
+                // just confuses the user with an unrelated permission dialog.
+                val canFixWithStorage = isPermissionError
+                    && !withPermission
+                    && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q
+                if (canFixWithStorage) {
                     doImportWithPermissionCheck(true)
                 } else {
                     tracker.trackException("Error in import", e, false)
