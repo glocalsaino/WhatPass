@@ -71,6 +71,11 @@
     @com.squareup.moshi.ToJson *;
 }
 
+# Moshi's enum adapter uses reflection to look up enum constants by name.
+# ProGuard strips unused enum fields, causing NoSuchFieldException at runtime.
+-keepclassmembers enum com.google.zxing.BarcodeFormat { *; }
+-keepclassmembers enum com.glocalsaino.miwallet.** { *; }
+
 # Kotlin specific
 -dontwarn kotlin.**
 
