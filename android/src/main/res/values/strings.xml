@@ -304,6 +304,9 @@ WhatPass was born after detecting a real need within the Android ecosystem.
 
     <string name="error_no_permission_msg">Need permission to import pass</string>
     <string name="error_no_permission_title">Permission Error</string>
+    <string name="storage_permission_title">Storage access needed</string>
+    <string name="storage_permission_message">To import this pass, WhatPass needs access to your Downloads folder. Please grant the Storage permission, or open the file from your Files app instead of from the browser notification.</string>
+    <string name="storage_permission_denied_msg">Storage permission is required to open this file. Open the pass from your Files app (Downloads folder) instead of tapping the browser download notification.</string>
     <string name="scan_pass_message">Scanning for passes. Please wait.</string>
 
 

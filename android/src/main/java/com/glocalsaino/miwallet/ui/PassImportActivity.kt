@@ -43,11 +43,21 @@ class PassImportActivity : AppCompatActivity() {
         if (!withPermission) {
             doImport(false)
         } else {
-            val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-                Manifest.permission.READ_MEDIA_IMAGES
-            else
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            requestPermissionLauncher.launch(permission)
+            val permission = Manifest.permission.READ_EXTERNAL_STORAGE
+            if (shouldShowRequestPermissionRationale(permission)) {
+                AlertDialog.Builder(this)
+                    .setTitle(R.string.storage_permission_title)
+                    .setMessage(R.string.storage_permission_message)
+                    .setPositiveButton(R.string.location_disclosure_ok) { _, _ ->
+                        requestPermissionLauncher.launch(permission)
+                    }
+                    .setNegativeButton(R.string.location_disclosure_cancel) { _, _ ->
+                        onExternalStorageDenied()
+                    }
+                    .show()
+            } else {
+                requestPermissionLauncher.launch(permission)
+            }
         }
     }
 
@@ -141,7 +151,7 @@ class PassImportActivity : AppCompatActivity() {
 
     private fun onExternalStorageDenied() {
         binding.progressContainer.visibility = GONE
-        alert(R.string.error_no_permission_msg, R.string.error_no_permission_title, onOK = { finish() })
+        alert(R.string.storage_permission_denied_msg, R.string.error_no_permission_title, onOK = { finish() })
     }
 
     private var pendingNavigate: (() -> Unit)? = null

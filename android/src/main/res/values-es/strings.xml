@@ -286,5 +286,8 @@ WhatPass nació al detectar una necesidad real dentro del ecosistema Android.
   <string name="open_file">Abrir archivo</string>
   <string name="error_no_permission_msg">Se necesita permiso para importar el pase</string>
   <string name="error_no_permission_title">Error de permisos</string>
+  <string name="storage_permission_title">Acceso al almacenamiento</string>
+  <string name="storage_permission_message">Para importar este pase, WhatPass necesita acceso a tu carpeta de Descargas. Concede el permiso de Almacenamiento, o abre el archivo desde la app Mis Archivos en lugar de desde la notificación del navegador.</string>
+  <string name="storage_permission_denied_msg">Se necesita permiso de almacenamiento para abrir este archivo. Abre el pase desde la app Mis Archivos (carpeta Descargas) en lugar de pulsar la notificación de descarga del navegador.</string>
   <string name="scan_pass_message">Buscando pases. Por favor, espere.</string>
 </resources>
