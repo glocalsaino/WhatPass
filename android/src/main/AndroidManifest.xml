@@ -130,6 +130,23 @@
                 <data android:host="*" android:pathPattern="/.*\\..*\\..*\\.pkpass" android:scheme="http"/>
             </intent-filter>
 
+            <!-- pkpass compartido desde otras apps (WhatsApp, Telegram, email...) -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/vnd.apple.pkpass"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/pkpass"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/octet-stream"/>
+            </intent-filter>
+
             <!-- espass -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>

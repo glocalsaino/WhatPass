@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View.GONE
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -50,10 +51,17 @@ class PassImportActivity : AppCompatActivity() {
         }
     }
 
+    private fun importUri(): Uri? =
+        intent.data ?: @Suppress("DEPRECATION") intent.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) as? Uri
+
     private fun doImport(withPermission: Boolean) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val fromURI = fromURI(this@PassImportActivity, intent!!.data!!, tracker)
+                val uri = importUri() ?: run {
+                    withContext(Dispatchers.Main) { finish() }
+                    return@launch
+                }
+                val fromURI = fromURI(this@PassImportActivity, uri, tracker)
 
                 withContext(Dispatchers.Main) {
                     binding.progressContainer.visibility = GONE
@@ -112,7 +120,7 @@ class PassImportActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (intent.data?.scheme == null) {
+        if (importUri()?.scheme == null) {
             tracker.trackException("invalid_import_uri", false)
             finish()
             return
