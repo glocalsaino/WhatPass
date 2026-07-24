@@ -265,7 +265,10 @@ object AppleStylePassReader {
             for (i in 0 until jsonArray.length()) {
                 try {
                     val jsonObject = jsonArray.getJSONObject(i)
-                    var value = getField(jsonObject, "value", translation)
+                    // attributedValue contains HTML with <a href> links per Apple's spec;
+                    // fall back to value (plain text) when attributedValue is absent.
+                    var value = getField(jsonObject, "attributedValue", translation)
+                        ?: getField(jsonObject, "value", translation)
 
                     if (jsonObject.has("dateStyle") && value != null) {
                         value = formatPassDateValue(jsonObject, value) ?: value

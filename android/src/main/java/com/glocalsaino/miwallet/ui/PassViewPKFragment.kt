@@ -2,6 +2,10 @@ package com.glocalsaino.miwallet.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.text.style.URLSpan
 import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.Gravity
@@ -197,7 +201,21 @@ class PassViewPKFragment : Fragment() {
         }
 
         if (backStrBuilder.isNotEmpty()) {
-            backFields.text = "$backStrBuilder".parseAsHtml()
+            val htmlSpanned = "$backStrBuilder".parseAsHtml()
+            val htmlLinks = SpannableString(htmlSpanned).let { s ->
+                s.getSpans(0, s.length, URLSpan::class.java)
+                    .map { Triple(it.url, s.getSpanStart(it), s.getSpanEnd(it)) }
+            }
+            backFields.text = htmlSpanned
+            LinkifyCompat.addLinks(backFields, Linkify.ALL)
+            val finalText = SpannableString(backFields.text)
+            for ((url, start, end) in htmlLinks) {
+                if (finalText.getSpans(start, end, URLSpan::class.java).isEmpty()) {
+                    finalText.setSpan(URLSpan(url), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+            }
+            backFields.text = finalText
+            backFields.movementMethod = LinkMovementMethod.getInstance()
             moreTextView.visibility = View.VISIBLE
         } else {
             moreTextView.visibility = View.GONE
@@ -222,8 +240,6 @@ class PassViewPKFragment : Fragment() {
             transitIconView.visibility = View.GONE
         }
 
-        LinkifyCompat.addLinks(backFields, Linkify.ALL)
-        backFields.movementMethod = android.text.method.LinkMovementMethod.getInstance()
 
         val passViewHolder = VerbosePassViewHolder(requireView().findViewById(R.id.pass_card))
         passViewHolder.apply(pass, passStore, requireActivity())

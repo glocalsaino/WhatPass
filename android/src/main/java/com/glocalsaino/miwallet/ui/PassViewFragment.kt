@@ -2,6 +2,10 @@ package com.glocalsaino.miwallet.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.text.style.URLSpan
 import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
@@ -211,14 +215,27 @@ class PassViewFragment : Fragment() {
         }
 
         if (backStrBuilder.isNotEmpty()) {
-            back_fields.text = "$backStrBuilder".parseAsHtml()
+            val htmlSpanned = "$backStrBuilder".parseAsHtml()
+            // Save URLSpans from HTML before LinkifyCompat removes them.
+            val htmlLinks = SpannableString(htmlSpanned).let { s ->
+                s.getSpans(0, s.length, URLSpan::class.java)
+                    .map { Triple(it.url, s.getSpanStart(it), s.getSpanEnd(it)) }
+            }
+            back_fields.text = htmlSpanned
+            LinkifyCompat.addLinks(back_fields, Linkify.ALL)
+            // Restore HTML URLSpans that Linkify removed, skipping ranges already linkified.
+            val finalText = SpannableString(back_fields.text)
+            for ((url, start, end) in htmlLinks) {
+                if (finalText.getSpans(start, end, URLSpan::class.java).isEmpty()) {
+                    finalText.setSpan(URLSpan(url), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+            }
+            back_fields.text = finalText
+            back_fields.movementMethod = LinkMovementMethod.getInstance()
             moreTextView.visibility = View.VISIBLE
         } else {
             moreTextView.visibility = View.GONE
         }
-
-        LinkifyCompat.addLinks(back_fields, Linkify.ALL)
-        back_fields.movementMethod = android.text.method.LinkMovementMethod.getInstance()
 
         val passViewHolder = VerbosePassViewHolder(requireView().findViewById(R.id.pass_card))
         passViewHolder.apply(pass, passStore, requireActivity())
