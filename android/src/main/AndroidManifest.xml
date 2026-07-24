@@ -23,6 +23,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="28"/>
 
     <uses-feature android:name="android.hardware.camera" android:required="false"/>
     <uses-feature android:name="android.hardware.bluetooth_le" android:required="false"/>
@@ -128,6 +129,17 @@
                 <data android:host="*" android:pathPattern="/.*\\..*\\..*\\..*\\.pkpass" android:scheme="https"/>
                 <data android:host="*" android:pathPattern="/.*\\..*\\.pkpass" android:scheme="http"/>
                 <data android:host="*" android:pathPattern="/.*\\..*\\..*\\.pkpass" android:scheme="http"/>
+            </intent-filter>
+
+            <!-- Fallback wildcard: Chrome en Android 6 puede usar application/zip, application/octet-stream,
+                 application/unknown u otro tipo. Las apps competidoras usan */* para aparecer siempre.
+                 isPassFile() en código cierra inmediatamente si no es un .pkpass. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="*/*"/>
+                <data android:scheme="content"/>
+                <data android:scheme="file"/>
             </intent-filter>
 
             <!-- pkpass compartido desde otras apps (WhatsApp, Telegram, email...) -->

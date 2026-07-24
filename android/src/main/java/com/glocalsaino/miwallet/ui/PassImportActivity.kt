@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
+import android.provider.OpenableColumns
 import android.view.View.GONE
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -59,6 +60,20 @@ class PassImportActivity : AppCompatActivity() {
 
     private fun importUri(): Uri? =
         intent.data ?: @Suppress("DEPRECATION") intent.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) as? Uri
+
+    private fun uriDisplayName(uri: Uri): String? {
+        if (uri.scheme == "content") {
+            contentResolver.query(uri, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)?.use {
+                if (it.moveToFirst()) return it.getString(0)
+            }
+        }
+        return uri.lastPathSegment
+    }
+
+    private fun isPassFile(uri: Uri): Boolean {
+        val name = uriDisplayName(uri)?.lowercase() ?: return true
+        return name.endsWith(".pkpass") || name.endsWith(".espass")
+    }
 
     private fun doImport(withPermission: Boolean) {
         lifecycleScope.launch(Dispatchers.IO) {
@@ -135,8 +150,14 @@ class PassImportActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (importUri()?.scheme == null) {
+        val uri = importUri()
+        if (uri?.scheme == null) {
             tracker.trackException("invalid_import_uri", false)
+            finish()
+            return
+        }
+        // When opened via generic application/octet-stream, verify the file is actually a pass
+        if (intent.type == "application/octet-stream" && !isPassFile(uri)) {
             finish()
             return
         }
