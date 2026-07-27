@@ -66,7 +66,7 @@ object BeaconScannerManager {
     }
 
     fun hasPassesWithBeacons(passStore: PassStore) =
-        passStore.passMap.values.any { it.beacons.isNotEmpty() }
+        passStore.allPasses().any { it.beacons.isNotEmpty() }
 
     @SuppressLint("MissingPermission")
     fun startIfNeeded(context: Context, passStore: PassStore) {
@@ -148,7 +148,7 @@ object BeaconScannerManager {
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_bluetooth_beacon)
-            .setContentTitle(pass.description ?: context.getString(R.string.app_name))
+            .setContentTitle(pass.creator ?: pass.description ?: context.getString(R.string.app_name))
             .setContentText(text)
             .setStyle(NotificationCompat.BigTextStyle().bigText(text))
             .setContentIntent(openIntent)

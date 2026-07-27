@@ -55,6 +55,42 @@
 
     </FrameLayout>
 
+    <!-- Overlay de espera mientras el servidor procesa el escaneo -->
+    <FrameLayout
+        android:id="@+id/loading_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#BB000000"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="32dp">
+
+            <ProgressBar
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:indeterminate="true"
+                android:indeterminateTint="#FFFFFF"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pass_reader_processing"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
     <!-- Barra superior con título y botón de código -->
     <LinearLayout
         android:layout_width="match_parent"

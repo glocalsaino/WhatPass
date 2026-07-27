@@ -1,9 +1,11 @@
 package com.glocalsaino.miwallet.ui
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.hardware.Camera
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -34,6 +36,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import org.json.JSONArray
+import java.net.SocketTimeoutException
+import org.json.JSONObject
 import java.util.concurrent.TimeUnit
 
 @Suppress("DEPRECATION")
@@ -48,6 +53,7 @@ class PassReaderActivity : AppCompatActivity(), SurfaceHolder.Callback {
     private var camera: Camera? = null
     private lateinit var surfaceView: SurfaceView
     private lateinit var resultOverlay: FrameLayout
+    private lateinit var loadingOverlay: FrameLayout
     private lateinit var resultIcon: TextView
     private lateinit var resultText: TextView
     private val reader = MultiFormatReader().apply {
@@ -79,6 +85,7 @@ class PassReaderActivity : AppCompatActivity(), SurfaceHolder.Callback {
 
         surfaceView = findViewById(R.id.scanner_surface)
         resultOverlay = findViewById(R.id.result_overlay)
+        loadingOverlay = findViewById(R.id.loading_overlay)
         resultIcon = findViewById(R.id.result_icon)
         resultText = findViewById(R.id.result_text)
 
@@ -216,6 +223,7 @@ class PassReaderActivity : AppCompatActivity(), SurfaceHolder.Callback {
         url.startsWith("http")
 
     private fun callScanUrl(rawUrl: String) {
+        loadingOverlay.visibility = View.VISIBLE
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 // Step 1: fetch the QR URL (may return a form asking for psEditCode)
@@ -225,8 +233,37 @@ class PassReaderActivity : AppCompatActivity(), SurfaceHolder.Callback {
                 Log.d(TAG, "Step 1 response (200 chars): ${html1.take(200)}")
 
                 if (!html1.contains("psEditCode", ignoreCase = true)) {
-                    // Check if this is a pass download URL, not a validation endpoint
                     val contentType = r1.headers["Content-Type"] ?: ""
+
+                    // PassSource JSON trigger response: scan was recorded server-side, extract
+                    // psDisplayURL from the trigger array and open it in the browser.
+                    if (contentType.contains("application/json", ignoreCase = true)) {
+                        val displayUrl = parsePassSourceDisplayUrl(html1)
+                        withContext(Dispatchers.Main) {
+                            if (displayUrl != null) {
+                                try { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(displayUrl))) }
+                                catch (_: Exception) {}
+                            }
+                            showResult(getString(R.string.pass_reader_ok), true)
+                        }
+                        return@launch
+                    }
+
+                    // The server redirected to an HTML display URL (e.g. a YouTube video):
+                    // the scan was processed and PassSource followed up with a redirect to the
+                    // content URL. Open that final URL in the browser and show success.
+                    if (html1.contains("<html", ignoreCase = true) && r1.priorResponse != null) {
+                        val finalUrl = r1.request.url.toString()
+                        withContext(Dispatchers.Main) {
+                            try { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(finalUrl))) }
+                            catch (_: Exception) {}
+                            showResult(getString(R.string.pass_reader_ok), true)
+                        }
+                        return@launch
+                    }
+
+                    // pkpass or plain HTML with no redirect — this is a pass download link,
+                    // not a validation endpoint the scanner is meant to handle.
                     if (contentType.contains("pkpass", ignoreCase = true) ||
                         html1.contains("<html", ignoreCase = true)
                     ) {
@@ -235,6 +272,7 @@ class PassReaderActivity : AppCompatActivity(), SurfaceHolder.Callback {
                         }
                         return@launch
                     }
+
                     // No form — the server returned a direct result
                     val msg = stripHtml(html1).ifEmpty {
                         if (r1.isSuccessful) getString(R.string.pass_reader_ok)
@@ -276,6 +314,15 @@ class PassReaderActivity : AppCompatActivity(), SurfaceHolder.Callback {
                 }
                 withContext(Dispatchers.Main) { showResult(msg, success) }
 
+            } catch (e: SocketTimeoutException) {
+                // Connection was established but the server was too slow to respond.
+                // This is characteristic of a pass-download URL generating/streaming a
+                // .pkpass file rather than a quick validation endpoint — direct the user
+                // to the correct scanner instead of showing a generic network error.
+                Log.w(TAG, "Scan URL timed out (likely a pass download URL): $rawUrl", e)
+                withContext(Dispatchers.Main) {
+                    showResult(getString(R.string.pass_reader_is_download_url), false)
+                }
             } catch (e: Exception) {
                 Log.e(TAG, "Scan request failed", e)
                 withContext(Dispatchers.Main) {
@@ -293,6 +340,30 @@ class PassReaderActivity : AppCompatActivity(), SurfaceHolder.Callback {
             .find(html)?.groupValues?.get(1)
     }
 
+    private fun parsePassSourceDisplayUrl(json: String): String? {
+        if (json.isBlank()) return null
+        return try {
+            val triggers: List<JSONObject> = when {
+                json.trimStart().startsWith("[") -> {
+                    val arr = JSONArray(json)
+                    (0 until arr.length()).map { arr.getJSONObject(it) }
+                }
+                json.trimStart().startsWith("{") -> {
+                    val obj = JSONObject(json)
+                    if (obj.has("triggers")) {
+                        val arr = obj.getJSONArray("triggers")
+                        (0 until arr.length()).map { arr.getJSONObject(it) }
+                    } else listOf(obj)
+                }
+                else -> emptyList()
+            }
+            triggers.firstOrNull { t ->
+                t.optString("action") == "PSActionSetValue" &&
+                        t.optString("targetPath") == "psDisplayURL"
+            }?.optString("value")?.takeIf { it.startsWith("http") }
+        } catch (e: Exception) { null }
+    }
+
     private fun stripHtml(html: String): String =
         html
             .replace(Regex("<title[^>]*>.*?</title>", RegexOption.DOT_MATCHES_ALL), "")
@@ -308,6 +379,7 @@ class PassReaderActivity : AppCompatActivity(), SurfaceHolder.Callback {
             .trim()
 
     private fun showResult(message: String, success: Boolean) {
+        loadingOverlay.visibility = View.GONE
         resultIcon.text = if (success) "✓" else "✗"
         resultText.text = message
         resultOverlay.setBackgroundColor(

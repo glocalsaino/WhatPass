@@ -121,7 +121,12 @@ abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view
         }
 
         val lastUpdatedView = view.findViewById<TextView>(R.id.last_updated_text)
-        val lastUpdatedMillis = File(passStore.getPathForID(pass.id), "pass.json").lastModified()
+        // main.json is written by save() on every import/update with the current clock time,
+        // so its mtime is always accurate. pass.json uses setLastModified() which silently
+        // fails on many Android file systems, leaving a stale timestamp after updates.
+        val passDir = passStore.getPathForID(pass.id)
+        val lastUpdatedMillis = File(passDir, "main.json").lastModified()
+            .takeIf { it > 0 } ?: File(passDir, "pass.json").lastModified()
         if (lastUpdatedMillis > 0) {
             val formatted = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(Date(lastUpdatedMillis))
             lastUpdatedView.text = view.context.getString(R.string.last_updated, formatted)

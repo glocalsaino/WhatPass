@@ -27,6 +27,7 @@ import com.glocalsaino.miwallet.functions.fromURI
 import com.glocalsaino.miwallet.model.PassStore
 import com.glocalsaino.miwallet.geofence.GeofenceManager
 import com.glocalsaino.miwallet.passkit.PassUpdateManager
+import com.glocalsaino.miwallet.push.PassPushUpdateWorker
 
 class PassImportActivity : AppCompatActivity() {
 
@@ -121,6 +122,18 @@ class PassImportActivity : AppCompatActivity() {
                         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(e.url)))
                     } catch (notFound: ActivityNotFoundException) {
                         tracker.trackException("No browser to open non-pass URL", notFound, false)
+                    }
+                    // If the scan triggered a server-side action (e.g. PassSource added points),
+                    // refresh the current pass after a short delay so the updated values appear
+                    // without the user having to manually press Update. The 3-second delay gives
+                    // PassSource time to process the scan and update the pass record before we pull.
+                    if (e.triggeredServerAction) {
+                        val pass = passStore.currentPass
+                        val passIdent = pass?.passIdent
+                        val serial = pass?.serial
+                        if (passIdent != null && serial != null && pass.webServiceURL != null) {
+                            PassPushUpdateWorker.enqueue(applicationContext, passIdent, serial, delaySeconds = 3)
+                        }
                     }
                     finish()
                 }

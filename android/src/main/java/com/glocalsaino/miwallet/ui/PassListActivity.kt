@@ -1,5 +1,6 @@
 package com.glocalsaino.miwallet.ui
 
+import android.Manifest
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.ActivityNotFoundException
@@ -13,6 +14,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
@@ -25,6 +27,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import com.glocalsaino.miwallet.startActivityFromClass
 import com.glocalsaino.miwallet.R
+import com.glocalsaino.miwallet.beacon.BeaconScannerManager
 import com.glocalsaino.miwallet.databinding.PassListBinding
 import com.glocalsaino.miwallet.model.PassStoreProjection
 import com.glocalsaino.miwallet.model.State
@@ -38,6 +41,12 @@ class PassListActivity : WhatPassActivity() {
     private val drawerToggle by lazy { ActionBarDrawerToggle(this, binding.drawerLayout, R.string.drawer_open, R.string.drawer_close) }
 
     private val adapter by lazy { PassTopicFragmentPagerAdapter(passStore.classifier, supportFragmentManager) }
+
+    private val requestBeaconScanPermission = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (granted) BeaconScannerManager.startIfNeeded(applicationContext, passStore)
+    }
 
 
     @TargetApi(VERSION_STARTING_TO_SUPPORT_STORAGE_FRAMEWORK)
@@ -100,6 +109,15 @@ class PassListActivity : WhatPassActivity() {
         passStore.syncPassStoreWithClassifier(getString(R.string.topic_new))
 
         refresh()
+
+        if (BeaconScannerManager.hasPassesWithBeacons(passStore) && !BeaconScannerManager.hasScanPermission(this)) {
+            val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                Manifest.permission.BLUETOOTH_SCAN
+            } else {
+                Manifest.permission.ACCESS_FINE_LOCATION
+            }
+            requestBeaconScanPermission.launch(permission)
+        }
 
         binding.fabActionScanQr.setOnClickListener {
             startActivity(Intent(this, QrImportActivity::class.java))

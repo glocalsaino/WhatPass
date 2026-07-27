@@ -18,6 +18,9 @@ import com.glocalsaino.miwallet.model.Settings
 import com.glocalsaino.miwallet.scan.events.PassScanEventChannelProvider
 import com.glocalsaino.miwallet.beacon.BeaconScannerManager
 import com.glocalsaino.miwallet.geofence.GeofenceManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 import timber.log.Timber
 
@@ -55,7 +58,11 @@ open class App : Application() {
         AndroidThreeTen.init(this)
         AppCompatDelegate.setDefaultNightMode(settings.getNightMode())
         GeofenceManager.registerAll(this, get())
-        BeaconScannerManager.startIfNeeded(this, get())
+        val appContext = this
+        val passStore = get<com.glocalsaino.miwallet.model.PassStore>()
+        GlobalScope.launch(Dispatchers.IO) {
+            BeaconScannerManager.startIfNeeded(appContext, passStore)
+        }
     }
 
 }

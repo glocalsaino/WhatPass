@@ -7,8 +7,8 @@ android {
     compileSdkVersion 36
 
     defaultConfig {
-        versionCode 15
-        versionName "1.1.2"
+        versionCode 16
+        versionName "1.1.3"
         minSdkVersion 23
         targetSdkVersion 36
         applicationId "com.glocalsaino.whatpass"

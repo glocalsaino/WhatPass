@@ -4,6 +4,8 @@ import android.content.Context
 import android.net.Uri
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import org.json.JSONArray
+import org.json.JSONObject
 import com.glocalsaino.miwallet.Tracker
 import com.glocalsaino.miwallet.model.InputStreamWithSource
 import java.io.BufferedInputStream
@@ -16,7 +18,13 @@ const val IPHONE_USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac O
 // Thrown instead of returning pass content when a scanned/opened URL turns out to be a
 // regular web page rather than a pass download link (even after trying the "download=true"
 // landing-page workaround) - callers should open it in the browser instead of showing an error.
-class NotAPassUrlException(val url: String) : Exception("Not a pass: $url")
+// triggeredServerAction=true means the server (e.g. PassSource) actually processed the request
+// and likely updated the pass data, so the caller should trigger a pass refresh after opening
+// the browser.
+class NotAPassUrlException(
+    val url: String,
+    val triggeredServerAction: Boolean = false
+) : Exception("Not a pass: $url")
 
 // A single shared client (instead of one per request) avoids paying for a fresh
 // DNS lookup/TLS handshake on every pass download, and the explicit callTimeout
@@ -110,6 +118,16 @@ private fun fromOKHttp(uri: Uri, tracker: Tracker): InputStreamWithSource? {
         throw NotAPassUrlException("$uri")
     }
 
+    // PassSource returns a JSON trigger array (not a pkpass) when a scan QR URL is accessed.
+    // One of the triggers may carry a psDisplayURL to show to the user. Extract it and open
+    // it in the browser rather than failing with an unhelpful "invalid pass" error.
+    if (response.header("Content-Type").orEmpty().contains("application/json", ignoreCase = true)) {
+        val bodyStr = response.body?.string().orEmpty()
+        response.close()
+        val displayUrl = parsePassSourceDisplayUrl(bodyStr)
+        throw NotAPassUrlException(displayUrl ?: "$uri", triggeredServerAction = true)
+    }
+
     val body = response.body
 
     if (body != null) {
@@ -117,6 +135,38 @@ private fun fromOKHttp(uri: Uri, tracker: Tracker): InputStreamWithSource? {
     }
 
     return null
+}
+
+// Searches a PassSource trigger JSON response for a PSActionSetValue action that sets
+// psDisplayURL, returning the URL value. Handles both a bare object and an array of triggers.
+private fun parsePassSourceDisplayUrl(json: String): String? {
+    if (json.isBlank()) return null
+    return try {
+        val triggers: List<JSONObject> = when {
+            json.trimStart().startsWith("[") -> {
+                val arr = JSONArray(json)
+                (0 until arr.length()).map { arr.getJSONObject(it) }
+            }
+            json.trimStart().startsWith("{") -> {
+                val obj = JSONObject(json)
+                // Could be a single trigger or {"triggers": [...]}
+                when {
+                    obj.has("triggers") -> {
+                        val arr = obj.getJSONArray("triggers")
+                        (0 until arr.length()).map { arr.getJSONObject(it) }
+                    }
+                    else -> listOf(obj)
+                }
+            }
+            else -> emptyList()
+        }
+        triggers.firstOrNull { t ->
+            t.optString("action") == "PSActionSetValue" &&
+                    t.optString("targetPath") == "psDisplayURL"
+        }?.optString("value")?.takeIf { it.startsWith("http") }
+    } catch (e: Exception) {
+        null
+    }
 }
 
 private fun fromContent(ctx: Context, uri: Uri) = InputStreamWithSource("$uri", ctx.contentResolver.openInputStream(uri)!!)

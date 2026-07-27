@@ -165,6 +165,9 @@ WhatPass was born after detecting a real need within the Android ecosystem.
     <string name="action_update">update</string>
     <string name="no_calendar_app_found">No Calendar-App found</string>
     <string name="pass_updated">Pass Updated</string>
+    <string name="pass_update_failed">Update failed (%s)</string>
+    <string name="pass_update_no_changes">Pass is already up to date</string>
+    <string name="pass_update_network_error">Network error — could not update pass</string>
     <string name="expiration_date_to_calendar_warning_message">You are about to add the expiration-date to the calendar - If you think there is a better date in this pass - please send it to me - WhatPass needs to know where this</string>
     <string name="expiration_date_to_calendar_warning_title">Add Expiration-Date</string>
     <string name="topic_trash">trash</string>
@@ -271,6 +274,7 @@ WhatPass was born after detecting a real need within the Android ecosystem.
     <string name="pass_reader_error">Error processing the pass</string>
     <string name="pass_reader_network_error">Network error — check your connection</string>
     <string name="pass_reader_is_download_url">This QR code downloads a pass. Use \"Add pass by scanning a QR\" instead.</string>
+    <string name="pass_reader_processing">Processing…</string>
     <string name="back">Back</string>
     <string name="nav_beacon">Bluetooth Beacon</string>
     <string name="beacon_title">Bluetooth Beacon</string>

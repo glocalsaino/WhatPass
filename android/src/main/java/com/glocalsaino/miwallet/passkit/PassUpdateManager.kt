@@ -21,6 +21,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
 import java.util.UUID
+import java.util.concurrent.TimeUnit
 
 object PassUpdateManager : KoinComponent {
 
@@ -38,7 +39,11 @@ object PassUpdateManager : KoinComponent {
     private const val PASS_CLIENT_NAME = "WhatPass"
     private const val PUSH_SERVICE_URL = "https://pushpassupdate-5xsk5gao2q-uc.a.run.app"
 
-    private val httpClient = OkHttpClient()
+    private val httpClient = OkHttpClient.Builder()
+        .connectTimeout(15, TimeUnit.SECONDS)
+        .readTimeout(60, TimeUnit.SECONDS)
+        .writeTimeout(15, TimeUnit.SECONDS)
+        .build()
 
     // Permite invocar el registro/desregistro como funciones "fire-and-forget"
     // desde callers que no tienen lifecycleScope propio (p.ej. SearchSuccessCallback).

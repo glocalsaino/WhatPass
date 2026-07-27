@@ -99,6 +99,16 @@ class AndroidFileSystemPassStore(
             result = AppleStylePassReader.read(pathForID, language, context, tracker)
         }
 
+        // Passes imported before beacon support was fully persisted have beacons=[] in
+        // main.json. Re-read from the original pass.json to restore the beacon data.
+        if (result != null && result.beacons.isEmpty() && File(pathForID, "pass.json").exists()) {
+            val fresh = AppleStylePassReader.read(pathForID, language, context, tracker)
+            if (fresh != null && fresh.beacons.isNotEmpty()) {
+                result = fresh
+                dirty = true
+            }
+        }
+
         if (result != null) {
             if (dirty) {
                 save(result)

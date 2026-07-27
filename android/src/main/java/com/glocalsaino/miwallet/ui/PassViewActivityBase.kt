@@ -27,6 +27,7 @@ import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import java.util.concurrent.TimeUnit
 import com.glocalsaino.miwallet.R
 import com.glocalsaino.miwallet.model.InputStreamWithSource
 import com.glocalsaino.miwallet.model.PassBitmapDefinitions.BITMAP_ICON
@@ -202,8 +203,13 @@ open class PassViewActivityBase : WhatPassActivity() {
             it.show()
         }
         lifecycleScope.launch(Dispatchers.IO) {
-            val client = OkHttpClient()
+            val client = OkHttpClient.Builder()
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(15, TimeUnit.SECONDS)
+                .build()
             val url = pass.webServiceURL + "/v1/passes/" + pass.passIdent + "/" + pass.serial
+            android.util.Log.d("PassUpdate", "Updating pass from: $url")
             val request = Request.Builder().url(url)
                 .addHeader("Authorization", "ApplePass " + pass.authToken)
                 .build()
@@ -211,45 +217,61 @@ open class PassViewActivityBase : WhatPassActivity() {
             updateHttpCall = call
             try {
                 val response = call.execute()
-                response.body?.let { body ->
-                    val inputStreamWithSource = InputStreamWithSource(url, body.byteStream())
-                    val spec = InputStreamUnzipControllerSpec(
-                        inputStreamWithSource, this@PassViewActivityBase, passStore,
-                        object : UnzipPassController.SuccessCallback {
-                            override fun call(uuid: String) {
-                                runOnUiThread {
-                                    if (isFinishing || isDestroyed) return@runOnUiThread
-                                    dlg.dismiss()
-                                    if (currentPass.id != uuid) passStore.deletePassWithId(currentPass.id)
-                                    val newPass = passStore.getPassbookForId(uuid)
-                                    passStore.currentPass = newPass
-                                    currentPass = passStore.currentPass!!
-                                    PassUpdateManager.registerForUpdatesIfPossible(applicationContext, currentPass)
-                                    GeofenceManager.register(applicationContext, currentPass)
-                                    refresh()
-                                    Snackbar.make(window.decorView, R.string.pass_updated, Snackbar.LENGTH_LONG).show()
-                                }
-                            }
-                        },
-                        object : UnzipPassController.FailCallback {
-                            override fun fail(reason: String) {
-                                runOnUiThread {
-                                    if (isFinishing || isDestroyed) return@runOnUiThread
-                                    dlg.dismiss()
-                                    AlertDialog.Builder(this@PassViewActivityBase)
-                                        .setMessage("Could not update pass :( $reason)")
-                                        .setPositiveButton(android.R.string.ok, null)
-                                        .show()
-                                }
+                if (!response.isSuccessful) {
+                    withContext(Dispatchers.Main) {
+                        if (isFinishing || isDestroyed) return@withContext
+                        dlg.dismiss()
+                        Snackbar.make(window.decorView, getString(R.string.pass_update_failed, response.code), Snackbar.LENGTH_LONG).show()
+                    }
+                    return@launch
+                }
+                val body = response.body
+                if (body == null) {
+                    withContext(Dispatchers.Main) {
+                        if (isFinishing || isDestroyed) return@withContext
+                        dlg.dismiss()
+                        Snackbar.make(window.decorView, R.string.pass_update_no_changes, Snackbar.LENGTH_LONG).show()
+                    }
+                    return@launch
+                }
+                val inputStreamWithSource = InputStreamWithSource(url, body.byteStream())
+                val spec = InputStreamUnzipControllerSpec(
+                    inputStreamWithSource, this@PassViewActivityBase, passStore,
+                    object : UnzipPassController.SuccessCallback {
+                        override fun call(uuid: String) {
+                            runOnUiThread {
+                                if (isFinishing || isDestroyed) return@runOnUiThread
+                                dlg.dismiss()
+                                if (currentPass.id != uuid) passStore.deletePassWithId(currentPass.id)
+                                val newPass = passStore.getPassbookForId(uuid)
+                                passStore.currentPass = newPass
+                                currentPass = passStore.currentPass!!
+                                PassUpdateManager.registerForUpdatesIfPossible(applicationContext, currentPass)
+                                GeofenceManager.register(applicationContext, currentPass)
+                                refresh()
+                                Snackbar.make(window.decorView, R.string.pass_updated, Snackbar.LENGTH_LONG).show()
                             }
                         }
-                    )
-                    spec.overwrite = true
-                    UnzipPassController.processInputStream(spec)
-                }
+                    },
+                    object : UnzipPassController.FailCallback {
+                        override fun fail(reason: String) {
+                            runOnUiThread {
+                                if (isFinishing || isDestroyed) return@runOnUiThread
+                                dlg.dismiss()
+                                Snackbar.make(window.decorView, getString(R.string.pass_update_failed, reason), Snackbar.LENGTH_LONG).show()
+                            }
+                        }
+                    }
+                )
+                spec.overwrite = true
+                UnzipPassController.processInputStream(spec)
             } catch (e: IOException) {
+                android.util.Log.e("PassUpdate", "Network error updating pass: ${e.javaClass.simpleName}: ${e.message}", e)
                 withContext(Dispatchers.Main) {
-                    if (!isDestroyed) dlg.dismiss()
+                    if (!isDestroyed) {
+                        dlg.dismiss()
+                        Snackbar.make(window.decorView, R.string.pass_update_network_error, Snackbar.LENGTH_LONG).show()
+                    }
                 }
             }
         }
