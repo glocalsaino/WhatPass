@@ -18,6 +18,7 @@ import com.glocalsaino.miwallet.model.Settings
 import com.glocalsaino.miwallet.scan.events.PassScanEventChannelProvider
 import com.glocalsaino.miwallet.beacon.BeaconScannerManager
 import com.glocalsaino.miwallet.geofence.GeofenceManager
+import com.glocalsaino.miwallet.passkit.PassUpdateManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -62,6 +63,11 @@ open class App : Application() {
         val passStore = get<com.glocalsaino.miwallet.model.PassStore>()
         GlobalScope.launch(Dispatchers.IO) {
             BeaconScannerManager.startIfNeeded(appContext, passStore)
+            // Re-register all passes with their web services on every launch so
+            // PassSource always has the current FCM token, even after token rotation
+            // or reinstall where onNewToken() may not have completed successfully.
+            val token = PassUpdateManager.getFcmToken(appContext)
+            if (token != null) PassUpdateManager.reRegisterAllPasses(appContext, token)
         }
     }
 

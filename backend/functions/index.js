@@ -71,8 +71,17 @@ exports.pushPassUpdate = onRequest(
       logger.info(`Sent FCM message ${messageId} for ${passTypeIdentifier}/${serialNumber}`);
       res.status(200).json({ success: true, messageId });
     } catch (error) {
-      logger.error("FCM send failed", error);
-      res.status(502).json({ success: false, error: String(error) });
+      const code = error?.errorInfo?.code ?? "";
+      if (code === "messaging/registration-token-not-registered") {
+        // The FCM token is no longer valid (app uninstalled or token rotated).
+        // Return 410 Gone so PassSource knows to remove this registration instead
+        // of retrying indefinitely with a dead token.
+        logger.warn(`Token no longer registered, returning 410: ${passTypeIdentifier}/${serialNumber}`);
+        res.status(410).json({ success: false, error: "token_not_registered" });
+      } else {
+        logger.error("FCM send failed", error);
+        res.status(502).json({ success: false, error: String(error) });
+      }
     }
   }
 );
