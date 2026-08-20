@@ -112,7 +112,7 @@ abstract class PassViewHolder(val view: CardView) : RecyclerView.ViewHolder(view
         val labelTextColor = if (pass.labelColor != 0) pass.labelColor else titleTextColor
 
         view.findViewById<TextView>(R.id.passTitle).apply {
-            text = pass.description
+            text = pass.creator ?: pass.description
             titleTextColor?.let { setTextColor(it) }
         }
 
