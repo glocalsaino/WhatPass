@@ -7,8 +7,8 @@ android {
     compileSdkVersion 36
 
     defaultConfig {
-        versionCode 19
-        versionName "1.1.5"
+        versionCode 20
+        versionName "1.1.6"
         minSdkVersion 23
         targetSdkVersion 36
         applicationId "com.glocalsaino.whatpass"
@@ -34,7 +34,7 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-project.txt'
             signingConfig signingConfigs.release
         }
         debug {
