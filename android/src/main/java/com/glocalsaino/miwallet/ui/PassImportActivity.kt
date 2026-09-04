@@ -59,8 +59,15 @@ class PassImportActivity : AppCompatActivity() {
         }
     }
 
-    private fun importUri(): Uri? =
-        intent.data ?: @Suppress("DEPRECATION") intent.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) as? Uri
+    private fun importUri(): Uri? {
+        val data = intent.data
+        // https://glocalsaino.com/pass?url=<pass-url> → extraer la URL real del pase
+        if (data != null && data.host == "glocalsaino.com" && data.path == "/pass") {
+            val passUrl = data.getQueryParameter("url")
+            if (!passUrl.isNullOrBlank()) return Uri.parse(passUrl)
+        }
+        return data ?: @Suppress("DEPRECATION") intent.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) as? Uri
+    }
 
     private fun uriDisplayName(uri: Uri): String? {
         if (uri.scheme == "content") {

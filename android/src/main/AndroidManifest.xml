@@ -179,6 +179,19 @@
                 <data android:host="*" android:pathPattern="/.*\\.espass" android:scheme="file"/>
             </intent-filter>
 
+            <!-- App Link: https://glocalsaino.com/pass?url=<pass-url>
+                 Abre directamente la app si está instalada; si no, la web redirige
+                 a Play Store con el referrer para importar el pase tras la instalación.
+                 autoVerify requiere .well-known/assetlinks.json en glocalsaino.com. -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"
+                      android:host="glocalsaino.com"
+                      android:path="/pass"/>
+            </intent-filter>
+
         </activity>
 
         <activity

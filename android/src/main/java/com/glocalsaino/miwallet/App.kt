@@ -1,7 +1,12 @@
 package com.glocalsaino.miwallet
 
 import android.app.Application
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatDelegate
+import com.android.installreferrer.api.InstallReferrerClient
+import com.android.installreferrer.api.InstallReferrerStateListener
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.squareup.moshi.Moshi
 import org.koin.android.ext.koin.androidContext
@@ -69,6 +74,39 @@ open class App : Application() {
             val token = PassUpdateManager.getFcmToken(appContext)
             if (token != null) PassUpdateManager.reRegisterAllPasses(appContext, token)
         }
+        handleInstallReferrer()
+    }
+
+    // Reads the Play Install Referrer exactly once (first launch after install).
+    // If the link that drove the install was https://glocalsaino.com/pass?url=<pass-url>,
+    // the web page encodes that URL as referrer=pass_url%3D<encoded-url> in the Play Store
+    // link, and we open PassImportActivity with it here so the pass is imported automatically.
+    private fun handleInstallReferrer() {
+        val prefs = getSharedPreferences("whatpass_prefs", Context.MODE_PRIVATE)
+        if (prefs.getBoolean("referrer_handled", false)) return
+        prefs.edit().putBoolean("referrer_handled", true).apply()
+
+        val referrerClient = InstallReferrerClient.newBuilder(this).build()
+        referrerClient.startConnection(object : InstallReferrerStateListener {
+            override fun onInstallReferrerSetupFinished(responseCode: Int) {
+                try {
+                    if (responseCode == InstallReferrerClient.InstallReferrerResponse.OK) {
+                        val referrerString = referrerClient.installReferrer.installReferrer
+                        val passUrl = Uri.parse("?$referrerString").getQueryParameter("pass_url")
+                        if (!passUrl.isNullOrBlank()) {
+                            startActivity(Intent(this@App, com.glocalsaino.miwallet.ui.PassImportActivity::class.java).apply {
+                                action = Intent.ACTION_VIEW
+                                data = Uri.parse(passUrl)
+                                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                            })
+                        }
+                    }
+                } finally {
+                    referrerClient.endConnection()
+                }
+            }
+            override fun onInstallReferrerServiceDisconnected() {}
+        })
     }
 
 }
