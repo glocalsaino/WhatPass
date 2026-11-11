@@ -35,7 +35,7 @@ class QrImportActivity : AppCompatActivity(), SurfaceHolder.Callback {
     private val requestCameraPermission = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
-        if (granted) startCamera() else {
+        if (granted) { if (camera == null) startCamera() } else {
             Toast.makeText(this, "Permiso de cámara necesario", Toast.LENGTH_LONG).show()
             finish()
         }
@@ -51,12 +51,27 @@ class QrImportActivity : AppCompatActivity(), SurfaceHolder.Callback {
         surfaceView.holder.addCallback(this)
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestCameraPermission.launch(Manifest.permission.CAMERA)
+        }
+        // camera is opened in onResume and released in onPause
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (camera == null && ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             == PackageManager.PERMISSION_GRANTED
         ) {
             startCamera()
-        } else {
-            requestCameraPermission.launch(Manifest.permission.CAMERA)
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        scanning = false
+        handler.removeCallbacksAndMessages(null)
+        releaseCamera()
     }
 
     private fun startCamera() {
@@ -72,6 +87,8 @@ class QrImportActivity : AppCompatActivity(), SurfaceHolder.Callback {
             }
             camera?.setPreviewDisplay(surfaceView.holder)
             camera?.startPreview()
+            scanning = true
+            scheduleNextFrame()
         } catch (e: Exception) {
             Log.e("QrImport", "Camera error", e)
         }
@@ -98,7 +115,15 @@ class QrImportActivity : AppCompatActivity(), SurfaceHolder.Callback {
     private fun scheduleNextFrame() {
         if (!scanning) return
         camera?.setOneShotPreviewCallback { data, cam ->
-            val size = cam.parameters.previewSize
+            // The frame may arrive after onPause/onDestroy released the camera
+            // (message already queued in Camera's EventHandler) -> ignore it.
+            if (cam == null || cam !== camera || !scanning || data == null) return@setOneShotPreviewCallback
+            val size = try {
+                cam.parameters.previewSize
+            } catch (e: RuntimeException) {
+                Log.w("QrImport", "Preview frame after camera release, ignoring", e)
+                return@setOneShotPreviewCallback
+            }
             Log.d("QrImport", "frame received ${size.width}x${size.height} bytes=${data.size}")
             decodeFrame(data, size.width, size.height)
             if (scanning) handler.postDelayed({ scheduleNextFrame() }, 300)
@@ -143,11 +168,22 @@ class QrImportActivity : AppCompatActivity(), SurfaceHolder.Callback {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun releaseCamera() {
+        val cam = camera ?: return
+        camera = null
+        try {
+            cam.setPreviewCallback(null)
+            cam.stopPreview()
+        } catch (e: RuntimeException) {
+            Log.w("QrImport", "stopPreview failed", e)
+        }
+        cam.release()
+    }
+
     override fun onDestroy() {
         scanning = false
-        camera?.stopPreview()
-        camera?.release()
-        camera = null
+        handler.removeCallbacksAndMessages(null)
+        releaseCamera()
         super.onDestroy()
     }
 
@@ -157,10 +193,13 @@ class QrImportActivity : AppCompatActivity(), SurfaceHolder.Callback {
         try {
             camera?.setPreviewDisplay(holder)
             camera?.startPreview()
+            scanning = true
             scheduleNextFrame()
         } catch (e: Exception) {
             Log.e("QrImport", "surfaceChanged error", e)
         }
     }
-    override fun surfaceDestroyed(holder: SurfaceHolder) {}
+    override fun surfaceDestroyed(holder: SurfaceHolder) {
+        scanning = false
+    }
 }

@@ -192,7 +192,15 @@ class PassReaderActivity : AppCompatActivity(), SurfaceHolder.Callback {
     private fun scheduleNextFrame() {
         if (!scanning) return
         camera?.setOneShotPreviewCallback { data, cam ->
-            val size = cam.parameters.previewSize
+            // The frame may arrive after onPause/onDestroy released the camera
+            // (message already queued in Camera's EventHandler) -> ignore it.
+            if (cam == null || cam !== camera || !scanning || data == null) return@setOneShotPreviewCallback
+            val size = try {
+                cam.parameters.previewSize
+            } catch (e: RuntimeException) {
+                Log.w(TAG, "Preview frame after camera release, ignoring", e)
+                return@setOneShotPreviewCallback
+            }
             decodeFrame(data, size.width, size.height)
             if (scanning) handler.postDelayed({ scheduleNextFrame() }, 50)
         }
@@ -400,12 +408,22 @@ class PassReaderActivity : AppCompatActivity(), SurfaceHolder.Callback {
         scheduleNextFrame()
     }
 
+    private fun releaseCamera() {
+        val cam = camera ?: return
+        camera = null
+        try {
+            cam.setPreviewCallback(null)
+            cam.stopPreview()
+        } catch (e: RuntimeException) {
+            Log.w(TAG, "stopPreview failed", e)
+        }
+        cam.release()
+    }
+
     override fun onDestroy() {
         scanning = false
         handler.removeCallbacksAndMessages(null)
-        camera?.stopPreview()
-        camera?.release()
-        camera = null
+        releaseCamera()
         super.onDestroy()
     }
 
@@ -413,9 +431,7 @@ class PassReaderActivity : AppCompatActivity(), SurfaceHolder.Callback {
         super.onPause()
         scanning = false
         handler.removeCallbacksAndMessages(null)
-        camera?.stopPreview()
-        camera?.release()
-        camera = null
+        releaseCamera()
     }
 
     override fun onResume() {
