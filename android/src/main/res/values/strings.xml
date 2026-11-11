@@ -118,7 +118,7 @@ WhatPass was born after detecting a real need within the Android ecosystem.
 <p>The developers, contributors and distributors of WhatPass shall not be liable for damages or losses arising from the use of the app, the inability to use it, errors in the data contained in the digital cards, failures of third-party services, loss of information, or actions carried out by users or third parties through the cards managed by the app, except in cases where liability cannot be excluded or limited under applicable law.</p>
 <p>WhatPass acts solely as a storage and management tool for digital cards. The developers are not responsible for the content, authenticity, validity, legality or accuracy of PKPASS cards issued by third parties, nor for the communications, promotions, loyalty programs, points systems, events or services associated with such cards.</p>
 <p>Nothing in this legal notice shall limit or exclude any liability that, under applicable European Union or member-state law, cannot be legally excluded or limited.</p>
-<p>More information and privacy policy at <a href=\'https://whatpass.es/\'>whatpass.es</a>. Contact: <a href=\'mailto:info@whatpass.es\'>info@whatpass.es</a>.</p>
+<p>Use of WhatPass is subject to the <a href=\'https://whatpass.es/terminos-y-condiciones/\'>Terms and Conditions</a> and the <a href=\'https://whatpass.es/politica-de-privacidad/\'>Privacy Policy</a>. More information at <a href=\'https://whatpass.es/\'>whatpass.es</a>. Contact: <a href=\'mailto:info@whatpass.es\'>info@whatpass.es</a>.</p>
 
     ]]></string>
     <string name="drawer_open">"open"</string>
@@ -247,6 +247,9 @@ WhatPass was born after detecting a real need within the Android ecosystem.
 
     <string name="preference_daynight_title">Day/Night theme</string>
     <string name="preference_daynight_summary">Should I be dark or light?</string>
+    <string name="preference_legal_category">Legal</string>
+    <string name="preference_terms_title">Terms and Conditions</string>
+    <string name="preference_privacy_title">Privacy Policy</string>
 
     <string name="image_import">Image Import</string>
     <string name="pdf_import">PDF Import</string>

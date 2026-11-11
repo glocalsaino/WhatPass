@@ -48,6 +48,7 @@ class BeaconActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_beacon)
+        EdgeToEdge.padForSystemBars(findViewById<android.view.ViewGroup>(android.R.id.content).getChildAt(0))
 
         prefs = getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         etUuid = findViewById(R.id.et_uuid)

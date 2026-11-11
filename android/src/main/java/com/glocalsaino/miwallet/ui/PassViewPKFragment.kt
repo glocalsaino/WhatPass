@@ -1,6 +1,5 @@
 package com.glocalsaino.miwallet.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
@@ -40,13 +39,6 @@ class PassViewPKFragment : Fragment() {
 
     private fun processImage(view: ImageView, name: String, pass: Pass) {
         val bitmap = pass.getBitmap(passStore, name)
-        if (bitmap != null && bitmap.width > 300) {
-            view.setOnClickListener {
-                val intent = Intent(view.context, TouchImageActivity::class.java)
-                intent.putExtra("IMAGE", name)
-                startActivity(intent)
-            }
-        }
         // The strip banner must always span the full card width per Apple's PassKit layout,
         // regardless of the source image's native resolution - so it's exempt from the
         // minimum touch-target height enforcement applied to small tappable images.
@@ -256,6 +248,7 @@ class PassViewPKFragment : Fragment() {
                               savedInstanceState: Bundle?): View {
 
         val rootView = inflater.inflate(R.layout.activity_pass_view_page, container, false)
+        EdgeToEdge.scrollClearOfNavigationBar(rootView as ViewGroup)
         arguments?.takeIf { it.containsKey(PassViewActivityBase.EXTRA_KEY_UUID) }?.apply {
             val uuid = getString(PassViewActivityBase.EXTRA_KEY_UUID)
             pass = if (uuid != null) {

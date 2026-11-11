@@ -38,6 +38,7 @@ class PassListFragment : Fragment() {
         adapter = PassAdapter(activity as AppCompatActivity, passStoreProjection)
 
         inflate.passRecyclerview.adapter = adapter
+        EdgeToEdge.scrollClearOfNavigationBar(inflate.passRecyclerview)
 
         inflate.passRecyclerview.layoutManager = LinearLayoutManager(activity)
 

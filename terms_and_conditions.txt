@@ -1,0 +1,118 @@
+TÉRMINOS Y CONDICIONES DE USO DE WHATPASS
+
+Última actualización: 10 de noviembre de 2026
+
+1. TITULAR DE LA APLICACIÓN
+
+En cumplimiento de la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), y del Reglamento (UE) 2022/2065 de Servicios Digitales, se informa de que la aplicación WhatPass (en adelante, "la Aplicación") es titularidad de:
+
+Glocal Saino, S.L.
+CIF: B32465080
+Domicilio: Lugar de Cinconogueiras, 15, 32150, A Peroxa, Ourense, España
+Inscrita en el Registro Mercantil de Ourense, Tomo 866, Libro 0, Folio 40, Hoja OR-14945.
+Web: https://whatpass.es/
+Contacto: info@whatpass.es
+
+(En adelante, "Glocal Saino").
+
+Glocal Saino actúa como comerciante (operador) a efectos de la normativa de la Unión Europea en la distribución de la Aplicación.
+
+2. OBJETO Y ACEPTACIÓN
+
+Estos Términos y Condiciones regulan la descarga, instalación y uso de la Aplicación. Si descargas, instalas o usas la Aplicación, aceptas estos Términos y la Política de Privacidad (https://whatpass.es/politica-de-privacidad). Si no estás de acuerdo, no instales ni uses la Aplicación.
+
+Para usar la Aplicación debes tener al menos 14 años o contar con la autorización de tus padres o tutores legales.
+
+3. DESCRIPCIÓN DEL SERVICIO
+
+WhatPass es un lector y organizador de pases digitales en formato .pkpass (el estándar de Apple Wallet), como entradas, tarjetas de embarque, cupones, tarjetas de fidelización o reservas. La Aplicación permite, entre otras funciones:
+
+ - importar pases desde un enlace, un correo, un código QR o un archivo del dispositivo;
+ - organizar los pases por carpetas;
+ - recibir avisos cuando un pase se actualiza, si su emisor lo admite;
+ - mostrar avisos de proximidad basados en las ubicaciones o balizas Bluetooth que el emisor haya configurado en el pase;
+ - validar pases de clientes con el escáner para operadores (sección 6).
+
+La Aplicación no requiere crear una cuenta.
+
+4. PASES Y SERVICIOS DE TERCEROS
+
+WhatPass no emite pases ni presta los servicios que hay detrás de ellos. Cada pase lo crea y lo gestiona la entidad que lo emite (aerolínea, comercio, organizador de eventos, administración, etc.), que es la única responsable de:
+
+ - el contenido, la validez y la exactitud del pase;
+ - las condiciones del servicio, la promoción, el saldo, los puntos o el acceso que el pase representa;
+ - las actualizaciones que envíe y el funcionamiento de sus servidores.
+
+Las reclamaciones sobre un pase o sobre el servicio que representa deben dirigirse a su emisor. Glocal Saino no puede garantizar que un establecimiento acepte un pase mostrado en la Aplicación.
+
+La Aplicación usa servicios de terceros, como Google Firebase Cloud Messaging y Google Play Services, que se rigen por sus propias condiciones.
+
+5. PRECIO Y PUBLICIDAD
+
+Actualmente la Aplicación es gratuita, no muestra publicidad y no incluye compras ni suscripciones.
+
+Glocal Saino podrá incorporar en el futuro publicidad o funciones de pago. En ese caso, actualizará estos Términos y la Política de Privacidad y lo informará antes de que el cambio se aplique. Las funciones de pago se ofrecerán siempre a través del sistema de pagos de Google Play, con información clara de su precio y condiciones antes de la compra.
+
+6. FUNCIÓN DE ESCÁNER PARA OPERADORES
+
+La función de escáner permite a comercios y organizaciones validar los pases de sus clientes, por ejemplo para otorgar o descontar puntos o registrar un acceso. La Aplicación envía la información del código escaneado directamente al servidor del emisor del pase.
+
+Quien use esta función:
+
+ - debe estar autorizado por el emisor del pase para realizar esas validaciones;
+ - es responsable de las operaciones que registre y del tratamiento de los datos de sus clientes conforme a la normativa de protección de datos;
+ - se compromete a no usarla para alterar saldos, puntos o accesos de forma fraudulenta.
+
+Glocal Saino no interviene en estas operaciones y no responde de su resultado.
+
+7. LICENCIA Y PROPIEDAD INTELECTUAL
+
+WhatPass es un trabajo derivado de PassAndroid (https://github.com/ligi/PassAndroid) y se distribuye bajo la licencia GNU General Public License v3.0 (GPL-3.0-only). Su código fuente completo está disponible en https://github.com/glocalsaino/WhatPass. Tus derechos sobre el software de la Aplicación (usarlo, estudiarlo, modificarlo y redistribuirlo) se rigen por esa licencia, y nada en estos Términos los limita.
+
+El nombre "WhatPass", su logotipo y demás signos distintivos, así como los contenidos del sitio web https://whatpass.es/, son propiedad de Glocal Saino o de sus licenciantes. Su uso requiere autorización previa por escrito, salvo en los casos que permita la ley. Si distribuyes una versión modificada de la Aplicación, no debes presentarla como la versión oficial de WhatPass.
+
+Los contenidos de los pases (logotipos, imágenes, textos) pertenecen a sus respectivos emisores.
+
+8. OBLIGACIONES DEL USUARIO
+
+Te comprometes a:
+
+ - usar la Aplicación conforme a la ley, a estos Términos y a la buena fe;
+ - no importar, crear, alterar ni distribuir pases falsificados o fraudulentos, ni pases sobre los que no tengas derecho de uso;
+ - no intentar acceder sin autorización a los sistemas de Glocal Saino o de los emisores de pases, ni sobrecargarlos o interferir en ellos, incluida la función de reenvío de notificaciones;
+ - no usar la Aplicación para actividades ilícitas o que perjudiquen a terceros.
+
+9. RESPONSABILIDAD
+
+Glocal Saino trabaja para que la Aplicación funcione bien, pero no garantiza que esté disponible sin interrupciones ni libre de errores. En la medida permitida por la ley, Glocal Saino no responde de:
+
+ - la pérdida de pases o datos guardados en el dispositivo, por ejemplo por desinstalación, cambio de dispositivo o avería (te recomendamos conservar una copia de los pases importantes);
+ - el contenido de los pases, su validez o su aceptación por parte de terceros;
+ - los fallos, retrasos o interrupciones de los servidores de los emisores o de servicios de terceros, incluida la entrega de notificaciones y avisos de proximidad;
+ - los daños derivados de un uso de la Aplicación contrario a estos Términos.
+
+Nada de lo dispuesto en estos Términos limita la responsabilidad de Glocal Saino en los casos en que la ley no lo permite, como el dolo o la culpa grave, ni los derechos que te reconoce la normativa de defensa de los consumidores y usuarios.
+
+10. PROTECCIÓN DE DATOS
+
+El tratamiento de datos personales se rige por la Política de Privacidad de WhatPass (https://whatpass.es/politica-de-privacidad), que forma parte de estos Términos.
+
+11. MODIFICACIONES, ACTUALIZACIONES Y SUSPENSIÓN
+
+Glocal Saino puede modificar estos Términos para adaptarlos a cambios legales, técnicos o del servicio. Los cambios importantes se anunciarán en https://whatpass.es/ o en la propia Aplicación antes de que entren en vigor. Si sigues usando la Aplicación después de esa fecha, se entiende que aceptas la nueva versión.
+
+Glocal Saino puede actualizar la Aplicación, modificar o retirar funciones y dejar de distribuirla en cualquier momento.
+
+Puedes dejar de usar la Aplicación cuando quieras desinstalándola.
+
+12. CONTACTO Y RECLAMACIONES
+
+Puedes enviar consultas, incidencias o reclamaciones a info@whatpass.es. Responderemos en el menor plazo posible y, en todo caso, dentro de los plazos legales.
+
+13. LEGISLACIÓN APLICABLE Y JURISDICCIÓN
+
+Estos Términos se rigen por la legislación española.
+
+Si eres consumidor, cualquier controversia se someterá a los juzgados y tribunales de tu domicilio, conforme al Real Decreto Legislativo 1/2007 (Ley General para la Defensa de los Consumidores y Usuarios). En los demás casos, las partes se someten a los juzgados y tribunales de Ourense (España).
+
+

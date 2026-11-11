@@ -114,7 +114,7 @@ WhatPass nació al detectar una necesidad real dentro del ecosistema Android.
 <p>Los desarrolladores, colaboradores y distribuidores de WhatPass no serán responsables de los daños o perjuicios que pudieran derivarse del uso de la aplicación, de la imposibilidad de utilizarla, de errores en los datos contenidos en las tarjetas digitales, de fallos en servicios de terceros, de pérdidas de información o de actuaciones realizadas por los usuarios o por terceros mediante las tarjetas gestionadas por la aplicación, excepto en aquellos supuestos en los que la responsabilidad no pueda ser excluida o limitada conforme a la legislación aplicable.</p>
 <p>WhatPass actúa únicamente como herramienta de almacenamiento y gestión de tarjetas digitales. Los desarrolladores no son responsables del contenido, autenticidad, validez, legalidad o exactitud de las tarjetas PKPASS emitidas por terceros, ni de las comunicaciones, promociones, programas de fidelización, sistemas de puntos, eventos o servicios asociados a dichas tarjetas.</p>
 <p>Nada de lo dispuesto en este aviso legal limitará o excluirá cualquier responsabilidad que, de acuerdo con la normativa aplicable de la Unión Europea o del Estado miembro correspondiente, no pueda ser legalmente excluida o limitada.</p>
-<p>Más información y política de privacidad en <a href=\'https://whatpass.es/\'>whatpass.es</a>. Contacto: <a href=\'mailto:info@whatpass.es\'>info@whatpass.es</a>.</p>
+<p>El uso de WhatPass está sujeto a los <a href=\'https://whatpass.es/terminos-y-condiciones/\'>Términos y Condiciones</a> y a la <a href=\'https://whatpass.es/politica-de-privacidad/\'>Política de Privacidad</a>. Más información en <a href=\'https://whatpass.es/\'>whatpass.es</a>. Contacto: <a href=\'mailto:info@whatpass.es\'>info@whatpass.es</a>.</p>
 
 ]]></string>
   <string name="notification_channel_pass_updates">Actualizaciones de pases</string>
@@ -234,6 +234,9 @@ WhatPass nació al detectar una necesidad real dentro del ecosistema Android.
   <string name="preference_sort_summary">¿Cómo debería ordenar los pases? </string>
   <string name="preference_daynight_title">Tema Diurno/Nocturno </string>
   <string name="preference_daynight_summary">¿Debería ser oscuro o claro? </string>
+  <string name="preference_legal_category">Información legal</string>
+  <string name="preference_terms_title">Términos y Condiciones</string>
+  <string name="preference_privacy_title">Política de Privacidad</string>
   <string name="image_import">Importar imagen</string>
   <string name="pdf_import">Importar PDF</string>
   <string name="field_source">fuente</string>

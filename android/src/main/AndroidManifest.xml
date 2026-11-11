@@ -209,8 +209,8 @@
         <activity android:name=".scan.PassScanActivity" android:exported="false"/>
         <activity android:name=".ui.TouchImageActivity" android:exported="false"/>
         <activity android:name=".ui.QrImportActivity" android:exported="false"/>
-        <activity android:name=".ui.PassReaderActivity" android:exported="false"/>
-        <activity android:name=".ui.BeaconActivity" android:exported="false"/>
+        <activity android:name=".ui.PassReaderActivity" android:theme="@style/AppThemeNoActionbar" android:exported="false"/>
+        <activity android:name=".ui.BeaconActivity" android:theme="@style/AppThemeNoActionbar" android:exported="false"/>
         <service android:name=".ui.BeaconService" android:exported="false"
             android:foregroundServiceType="connectedDevice"/>
 

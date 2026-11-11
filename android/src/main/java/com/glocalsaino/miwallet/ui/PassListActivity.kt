@@ -80,6 +80,7 @@ class PassListActivity : WhatPassActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+        EdgeToEdge.marginAboveNavigationBar(binding.fam)
 
 
         binding.drawerLayout.addDrawerListener(drawerToggle)

@@ -52,6 +52,8 @@ open class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        com.glocalsaino.miwallet.ui.EdgeToEdge.register(this)
+
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
 
         startKoin {

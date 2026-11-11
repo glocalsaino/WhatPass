@@ -32,4 +32,29 @@
             android:title="@string/preference_daynight_title"
             app:iconSpaceReserved="false" />
 
+
+    <PreferenceCategory
+            android:title="@string/preference_legal_category"
+            app:iconSpaceReserved="false">
+
+        <Preference
+                android:key="legal_terms"
+                android:title="@string/preference_terms_title"
+                app:iconSpaceReserved="false">
+            <intent
+                    android:action="android.intent.action.VIEW"
+                    android:data="https://whatpass.es/terminos-y-condiciones/" />
+        </Preference>
+
+        <Preference
+                android:key="legal_privacy"
+                android:title="@string/preference_privacy_title"
+                app:iconSpaceReserved="false">
+            <intent
+                    android:action="android.intent.action.VIEW"
+                    android:data="https://whatpass.es/politica-de-privacidad/" />
+        </Preference>
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

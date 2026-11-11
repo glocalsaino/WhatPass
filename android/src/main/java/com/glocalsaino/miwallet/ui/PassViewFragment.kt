@@ -1,6 +1,5 @@
 package com.glocalsaino.miwallet.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
@@ -28,6 +27,7 @@ import com.glocalsaino.miwallet.model.PassBitmapDefinitions
 import com.glocalsaino.miwallet.model.PassDefinitions
 import com.glocalsaino.miwallet.model.PassStore
 import com.glocalsaino.miwallet.model.pass.Pass
+import com.glocalsaino.miwallet.model.pass.PassType
 import com.glocalsaino.miwallet.ui.pass_view_holder.VerbosePassViewHolder
 
 class PassViewFragment : Fragment() {
@@ -42,13 +42,6 @@ class PassViewFragment : Fragment() {
 
     private fun processImage(view: ImageView, name: String, pass: Pass) {
         val bitmap = pass.getBitmap(passStore, name)
-        if (bitmap != null && bitmap.width > 300) {
-            view.setOnClickListener {
-                val intent = Intent(view.context, TouchImageActivity::class.java)
-                intent.putExtra("IMAGE", name)
-                startActivity(intent)
-            }
-        }
         // The strip banner must always span the full card width per Apple's PassKit layout,
         // regardless of the source image's native resolution - so it's exempt from the
         // minimum touch-target height enforcement applied to small tappable images.
@@ -121,11 +114,6 @@ class PassViewFragment : Fragment() {
         if (thumbnailBitmap != null) {
             thumbnailView.setImageBitmap(thumbnailBitmap)
             thumbnailView.visibility = View.VISIBLE
-            thumbnailView.setOnClickListener {
-                val intent = Intent(thumbnailView.context, TouchImageActivity::class.java)
-                intent.putExtra("IMAGE", PassBitmapDefinitions.BITMAP_THUMBNAIL)
-                startActivity(intent)
-            }
         } else {
             thumbnailView.visibility = View.GONE
         }
@@ -203,6 +191,13 @@ class PassViewFragment : Fragment() {
                 value?.text = field.value
                 valueColor?.let { value?.setTextColor(it) }
 
+                // generic passes show the primaryFields label above its value (other types,
+                // e.g. storeCard, keep the value-above-label order of main_field_item).
+                if (pass.type == PassType.GENERIC && field.hint == "primaryFields" && key != null && v is LinearLayout) {
+                    v.removeView(key)
+                    v.addView(key, 0)
+                }
+
                 // Apple's Wallet convention: when several fields share a row (same container),
                 // the first is left-aligned and the rest are right-aligned against the pass edge.
                 if (isRowSharedField && container.childCount > 0) {
@@ -252,6 +247,7 @@ class PassViewFragment : Fragment() {
                               savedInstanceState: Bundle?): View {
 
         val rootView = inflater.inflate(R.layout.activity_pass_view_page, container, false)
+        EdgeToEdge.scrollClearOfNavigationBar(rootView as ViewGroup)
         arguments?.takeIf { it.containsKey(PassViewActivityBase.EXTRA_KEY_UUID) }?.apply {
             val uuid = getString(PassViewActivityBase.EXTRA_KEY_UUID)
             pass = if (uuid != null) {

@@ -82,6 +82,7 @@ class PassReaderActivity : AppCompatActivity(), SurfaceHolder.Callback {
         super.onCreate(savedInstanceState)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         setContentView(R.layout.activity_pass_reader)
+        EdgeToEdge.padForSystemBars(findViewById<android.view.ViewGroup>(android.R.id.content).getChildAt(0))
 
         surfaceView = findViewById(R.id.scanner_surface)
         resultOverlay = findViewById(R.id.result_overlay)
