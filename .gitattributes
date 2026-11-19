@@ -1,0 +1,3 @@
+# Excluded from distribution zips built with git archive.
+CLAUDE.md export-ignore
+.vscode export-ignore
